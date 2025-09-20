@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-mint-500: oklch(0.72 0.11 178);
+  --color-primary: bg-blue-500;
+  --color-app-background: rgb(221, 224, 242);
+  --color-primary-content: rgb(255, 255, 255);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
