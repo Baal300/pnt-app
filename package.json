@@ -2,7 +2,7 @@
   "name": "pokemon-name-translator",
   "private": true,
   "version": "0.0.1",
-  "homepage": "https://baal300.github.io/Pokemon-Name-Translator-App",
+  "homepage": "https://baal300.github.io/pnt-app",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
