@@ -21,6 +21,7 @@ import {
 import germanPokemonNames from "./data/pkmn_german.json";
 import regionsData from "./data/regions.json";
 import { Header } from "./components/Header";
+import { NameSearchBar } from "./components/NameSearchBar";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const regions: Region[] = regionsData as Region[];
@@ -161,20 +162,12 @@ function App() {
     <>
       <Header />
       <main className="bg-app-background flex min-h-screen flex-col items-center justify-center p-4 dark:bg-gray-800">
-        <input
-          className="mb-2 rounded border p-2"
-          placeholder="Enter name"
-          value={input}
-          onChange={handleInputChange}
+        <NameSearchBar
+          input={input}
+          onInputChange={handleInputChange}
+          onNameEntered={handleNameEntered}
           onKeyDown={handleKeyDown}
-          autoFocus
         />
-        <button
-          className="mb-2 rounded border bg-blue-500 p-2 text-white hover:bg-blue-400 active:bg-blue-300"
-          onClick={() => handleNameEntered(input)}
-        >
-          Translate
-        </button>
         <SuggestionsList
           suggestions={suggestions}
           nameEnteredHandler={handleNameEntered}
