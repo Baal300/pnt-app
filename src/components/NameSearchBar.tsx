@@ -43,7 +43,7 @@ export const NameSearchBar = ({
         />
       </label>
       <button
-        className="btn btn-primary"
+        className="btn btn-primary mb-4 max-w-[32rem] min-w-[16rem] text-xl"
         onClick={() => handleNameEntered(input)}
       >
         Translate
