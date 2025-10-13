@@ -15,7 +15,7 @@ export const NameSearchBar = ({
 }: NameSearchBarProps) => {
   return (
     <>
-      <label className="input mt-2 mb-2 w-full max-w-[32rem] min-w-[20rem]">
+      <label className="input mt-2 mb-2 w-full max-w-[32rem] min-w-[20rem] dark:border-gray-300 dark:bg-gray-700 dark:text-white">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +43,7 @@ export const NameSearchBar = ({
         />
       </label>
       <button
-        className="btn mb-2 rounded border bg-blue-500 p-2 text-white hover:bg-blue-400 active:bg-blue-300"
+        className="btn btn-primary"
         onClick={() => handleNameEntered(input)}
       >
         Translate

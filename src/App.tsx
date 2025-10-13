@@ -161,7 +161,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="bg-app-background flex min-h-screen flex-col items-center justify-center p-4 dark:bg-gray-800">
+      <main className="bg-app-background dark:bg-app-background-dark flex min-h-screen flex-col items-center justify-center p-4">
         <NameSearchBar
           input={input}
           onInputChange={handleInputChange}

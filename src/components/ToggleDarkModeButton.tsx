@@ -17,16 +17,14 @@ export const ToggleDarkModeButton = ({
   };
 
   return (
-    <label
-      className={`flex cursor-pointer gap-2 ${className} items-center text-white`}
-    >
+    <label className={`flex cursor-pointer gap-2 ${className} items-center`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
+        stroke="white"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -37,7 +35,7 @@ export const ToggleDarkModeButton = ({
       <input
         type="checkbox"
         value="synthwave"
-        className="toggle theme-controller text-white"
+        className="toggle theme-controller border-gray-300 bg-white text-gray-600 checked:bg-cyan-800 checked:text-white"
         onChange={handleToggle}
       />
       <svg
@@ -46,7 +44,7 @@ export const ToggleDarkModeButton = ({
         height="20"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
+        stroke="white"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
