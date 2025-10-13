@@ -9,9 +9,8 @@ type NameSearchBarProps = {
 
 export const NameSearchBar = ({
   input,
-  onInputChange: handleInputChange,
-  onNameEntered: handleNameEntered,
-  onKeyDown: handleKeyDown,
+  onInputChange,
+  onKeyDown,
 }: NameSearchBarProps) => {
   return (
     <>
@@ -37,17 +36,11 @@ export const NameSearchBar = ({
           type="search"
           placeholder="Enter name"
           value={input}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
+          onChange={onInputChange}
+          onKeyDown={onKeyDown}
           autoFocus
         />
       </label>
-      <button
-        className="btn btn-primary mb-4 max-w-[32rem] min-w-[16rem] text-xl"
-        onClick={() => handleNameEntered(input)}
-      >
-        Translate
-      </button>
     </>
   );
 };

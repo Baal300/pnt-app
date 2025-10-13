@@ -22,6 +22,7 @@ import germanPokemonNames from "./data/pkmn_german.json";
 import regionsData from "./data/regions.json";
 import { Header } from "./components/Header";
 import { NameSearchBar } from "./components/NameSearchBar";
+import { TranslateButton } from "./components/TranslateButton";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const regions: Region[] = regionsData as Region[];
@@ -185,6 +186,7 @@ function App() {
         >
           Switch
         </button>
+        <TranslateButton input={input} onClick={handleNameEntered} />
 
         <InfoBox pokemonData={result} isLoading={isLoading} />
 
