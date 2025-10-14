@@ -23,7 +23,7 @@ export const LanguageSelector = ({
 
   return (
     <select
-      className="mb-2 rounded border p-2"
+      className="select select-lg"
       value={selectedLanguage}
       onChange={handleLanguageChange}
     >
