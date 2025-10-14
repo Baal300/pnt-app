@@ -23,6 +23,7 @@ import regionsData from "./data/regions.json";
 import { Header } from "./components/Header";
 import { NameSearchBar } from "./components/NameSearchBar";
 import { TranslateButton } from "./components/TranslateButton";
+import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const regions: Region[] = regionsData as Region[];
@@ -36,7 +37,7 @@ function App() {
     { number: number; name: PokemonName; image: string }[]
   >([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [translatedLanguage, setTranslatedLanguage] = useState("de");
+  const [translatedLanguage] = useState("de");
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
   const [isLoading, setIsLoading] = useState(false);
@@ -174,18 +175,11 @@ function App() {
           nameEnteredHandler={handleNameEntered}
           highlightedIndex={highlightedIndex}
         />
-        <LanguageSelector
-          translatedLanguage={translatedLanguage}
-          setTranslatedLanguage={setTranslatedLanguage}
-        />
-        <button
-          className="m-1 rounded-2xl border border-blue-700 bg-blue-500 p-2 px-4 hover:cursor-pointer hover:bg-blue-400 active:bg-blue-300"
-          onClick={() => {
-            setTranslatedLanguage((prev) => (prev === "en" ? "de" : "en"));
-          }}
-        >
-          Switch
-        </button>
+        <div className="join gap-0.5">
+          <LanguageSelector isLanguageTranslatedFrom />
+          <SwitchLanguageButton />
+          <LanguageSelector isLanguageTranslatedFrom={false} />
+        </div>
         <TranslateButton input={input} onClick={handleNameEntered} />
 
         <InfoBox pokemonData={result} isLoading={isLoading} />
