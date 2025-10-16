@@ -96,7 +96,7 @@ function App() {
           setInput={setInput}
           onTranslateName={handleTranslateName}
         />
-        <div className="join gap-0.5">
+        <div className="join m-2 items-center gap-0.5">
           <LanguageSelector isLanguageTranslatedFrom />
           <SwitchLanguageButton />
           <LanguageSelector isLanguageTranslatedFrom={false} />
