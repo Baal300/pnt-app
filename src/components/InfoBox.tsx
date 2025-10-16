@@ -14,11 +14,12 @@ export const InfoBox = ({ pokemonData, isLoading }: InfoBoxProps) => {
 
   return (
     <div
-      className="relative flex h-[651px] w-[356px]"
+      className="relative flex h-[651px] w-[330px]"
       style={{
         backgroundImage: `url(${pkmnUI})`,
-        backgroundSize: "cover",
+        backgroundSize: "contain",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="absolute inset-0 top-[150px] flex justify-center">

@@ -7,7 +7,7 @@ type PokemonGalleryProps = {
 };
 
 export const PokemonGallery = ({ pokemonList }: PokemonGalleryProps) => (
-  <div className="grid grid-cols-3 gap-4 sm:grid-cols-5 lg:grid-cols-7">
+  <div className="xs:grid-cols-3 grid grid-cols-2 gap-4 sm:grid-cols-5 lg:grid-cols-7">
     {pokemonList.map((poke) => (
       <div
         key={poke.number}
