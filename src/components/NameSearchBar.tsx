@@ -16,6 +16,7 @@ export const NameSearchBar = ({
 }: NameSearchBarProps) => {
   const { suggestions, setSuggestions, pokemonNames } = useSearch();
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+  const maxSuggestions = 8;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (suggestions.length === 0) return;
@@ -52,7 +53,7 @@ export const NameSearchBar = ({
       const matches = pokemonNames.filter(
         (name) => name && name.toLowerCase().startsWith(value.toLowerCase()),
       );
-      setSuggestions(matches.slice(0, 10)); // Show up to 10 suggestions
+      setSuggestions(matches.slice(0, maxSuggestions)); // Show up to 10 suggestions
     } else {
       setSuggestions([]);
     }
@@ -66,8 +67,8 @@ export const NameSearchBar = ({
   };
 
   return (
-    <div>
-      <label className="input mt-2 mb-2 w-full max-w-[32rem] min-w-[20rem] dark:border-gray-300 dark:bg-gray-700 dark:text-white">
+    <div className="mt-2 mb-2">
+      <label className="input w-full max-w-[32rem] min-w-[20rem] dark:border-gray-300 dark:bg-gray-700 dark:text-white">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
