@@ -8,9 +8,7 @@ export const useSearch = () => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const { fromLanguage } = useTranslation();
 
-  // All your search logic here...
-
-  // Fetch pokemon names inside the hook
+  // Fetch pokemon names
   useEffect(() => {
     if (fromLanguage === "en") {
       fetchPokemonNames()

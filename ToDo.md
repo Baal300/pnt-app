@@ -1,4 +1,4 @@
 # ToDos
 
-- Fix language of name suggestions
+- Fix German to English translation
 - Add music

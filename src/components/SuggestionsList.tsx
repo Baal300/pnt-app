@@ -22,13 +22,15 @@ export const SuggestionsList = ({
 
   return (
     suggestions.length > 0 && (
-      <div className="mb-2 w-full max-w-xs rounded border bg-white shadow">
+      <div className="dark:bg-gray-700dark:text-white mb-2 w-full max-w-xs rounded border bg-white shadow dark:border-gray-300 dark:bg-gray-700 dark:text-white">
         <ul className="m-0 list-none p-0">
           {suggestions.map((name, index) => (
             <li
               key={name}
               className={`flex cursor-pointer items-center gap-2 px-2 py-1 ${
-                index === highlightedIndex ? "bg-gray-300" : "hover:bg-gray-200"
+                index === highlightedIndex
+                  ? "bg-gray-300"
+                  : "hover:bg-gray-200 dark:hover:bg-gray-600"
               }`}
               onClick={handleSuggestionSelected.bind(null, name)}
             >
