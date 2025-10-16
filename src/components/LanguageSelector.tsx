@@ -16,8 +16,16 @@ export const LanguageSelector = ({
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (isLanguageTranslatedFrom) {
       setFromLanguage(e.target.value);
+      if (e.target.value === toLanguage) {
+        // Swap languages if they are the same
+        setToLanguage(fromLanguage);
+      }
     } else {
       setToLanguage(e.target.value);
+      if (e.target.value === fromLanguage) {
+        // Swap languages if they are the same
+        setFromLanguage(toLanguage);
+      }
     }
   };
 
