@@ -1,4 +1,4 @@
-import pkmnUI from "../asset/Pkmn_ruby_ui.png";
+import pkmnUI from "../assets/Pkmn_ruby_ui.png";
 import type { PokemonDataResponse } from "../types";
 
 type InfoBoxProps = {
