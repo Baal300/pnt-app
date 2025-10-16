@@ -88,7 +88,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="dark:text-primary-content">
       <Header />
       <main className="bg-app-background dark:bg-app-background-dark flex min-h-screen flex-col items-center justify-center p-4">
         <NameSearchBar
@@ -105,7 +105,11 @@ function App() {
 
         <InfoBox pokemonData={result} isLoading={isLoading} />
 
-        <RegionSelector regions={REGIONS} setRegionIndex={setRegionIndex} />
+        <RegionSelector
+          regions={REGIONS}
+          setRegionIndex={setRegionIndex}
+          regionIndex={regionIndex}
+        />
 
         <h2 className="mt-8 mb-4 text-2xl font-bold">Pokémon Gallery</h2>
         <h3 className="mb-2 text-lg font-semibold">
@@ -113,7 +117,7 @@ function App() {
         </h3>
         <PokemonGallery pokemonList={pokemonList} />
       </main>
-    </>
+    </div>
   );
 }
 
