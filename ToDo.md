@@ -1,4 +1,4 @@
 # ToDos
 
-- Fix dark mode
+- Fix German to English translation
 - Add music
