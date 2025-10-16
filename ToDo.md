@@ -1,4 +1,4 @@
 # ToDos
 
-- Fix language of name suggestions
+- Fix dark mode
 - Add music
