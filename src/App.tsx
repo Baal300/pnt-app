@@ -15,16 +15,17 @@ import { Header } from "./components/Header";
 import { NameSearchBar } from "./components/NameSearchBar";
 import { TranslateButton } from "./components/TranslateButton";
 import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
+import { useTranslation } from "./hooks/useTranslation";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function App() {
+  const { toLanguage } = useTranslation();
   const [input, setInput] = useState("");
   const [result, setResult] = useState<PokemonDataResponse | null>();
   const [pokemonList, setPokemonList] = useState<
     { number: number; name: PokemonName; image: string }[]
   >([]);
-  const [translatedLanguage] = useState("de");
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -73,7 +74,7 @@ function App() {
     if (name.length > 0) {
       setIsLoading(true);
       try {
-        translatePokemonName(name, translatedLanguage, API_URL)
+        translatePokemonName(name, toLanguage, API_URL)
           .then(setResult)
           .finally(() => setIsLoading(false));
       } catch (error) {
