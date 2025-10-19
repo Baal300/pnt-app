@@ -28,44 +28,55 @@ function App() {
   >([]);
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingRegion, setIsLoadingRegion] = useState(false);
 
   useEffect(() => {
     async function fetchPokemon() {
-      const results = await fetchPokemonByRegion(
-        REGIONS[regionIndex].start,
-        REGIONS[regionIndex].end,
-      );
-      const details = await Promise.all(
-        results.map(async (poke: { name: string; url: string }) => {
-          const pokemonData = await fetchPokemonDetails(poke.url);
-          const speciesData: SpeciesData = await fetchSpeciesDetails(
-            pokemonData.species.url,
-          );
+      setIsLoadingRegion(true);
+      try {
+        const results = await fetchPokemonByRegion(
+          REGIONS[regionIndex].start,
+          REGIONS[regionIndex].end,
+        );
+        const details = await Promise.all(
+          results.map(async (poke: { name: string; url: string }) => {
+            const pokemonData = await fetchPokemonDetails(poke.url);
+            const speciesData: SpeciesData = await fetchSpeciesDetails(
+              pokemonData.species.url,
+            );
 
-          // Extract names in different languages
-          const english = speciesData.names.find(
-            (n) => n.language.name === "en",
-          );
-          const japanese = speciesData.names.find(
-            (n) => n.language.name === "roomaji",
-          );
-          const german = speciesData.names.find(
-            (n) => n.language.name === "de",
-          );
+            // Extract names in different languages
+            const english = speciesData.names.find(
+              (n) => n.language.name === "en",
+            );
+            const japanese = speciesData.names.find(
+              (n) => n.language.name === "roomaji",
+            );
+            const german = speciesData.names.find(
+              (n) => n.language.name === "de",
+            );
 
-          return {
-            number: pokemonData.id,
-            name: {
-              english: english?.name,
-              german: german?.name,
-              japanese: japanese?.name,
-            },
-            image: pokemonData.sprites.front_default,
-          };
-        }),
-      );
-      setPokemonList(details);
+            return {
+              number: pokemonData.id,
+              name: {
+                english: english?.name,
+                german: german?.name,
+                japanese: japanese?.name,
+              },
+              image: pokemonData.sprites.front_default,
+            };
+          }),
+        );
+        setPokemonList(details);
+        setIsLoadingRegion(false);
+      } catch (error) {
+        console.error("Error fetching Pokémon by region: ", error);
+        setPokemonList([]);
+        setIsLoadingRegion(false);
+        return;
+      }
     }
+
     fetchPokemon();
   }, [regionIndex]);
 
@@ -116,7 +127,11 @@ function App() {
         <h3 className="mb-2 text-lg font-semibold">
           {REGIONS[regionIndex].name}
         </h3>
-        <PokemonGallery pokemonList={pokemonList} />
+        {isLoadingRegion ? (
+          <span className="loading loading-dots loading-lg"></span>
+        ) : (
+          <PokemonGallery pokemonList={pokemonList} />
+        )}
       </main>
     </div>
   );
