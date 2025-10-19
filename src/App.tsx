@@ -3,35 +3,43 @@ import { InfoBox } from "./components/InfoBox";
 import { PokemonGallery } from "./components/PokemonGallery";
 import { RegionSelector } from "./components/RegionSelector";
 import { LanguageSelector } from "./components/LanguageSelector";
-import type { PokemonDataResponse, PokemonName, SpeciesData } from "./types";
+import type { PokemonDataResponse, PokemonDetails, SpeciesData } from "./types";
 import {
   fetchPokemonByRegion,
   fetchPokemonDetails,
   fetchSpeciesDetails,
   translatePokemonName,
 } from "./utils/api";
-import { REGIONS } from "./constants/constants";
+import { API_URL, REGIONS } from "./constants/constants";
 import { Header } from "./components/Header";
 import { NameSearchBar } from "./components/NameSearchBar";
 import { TranslateButton } from "./components/TranslateButton";
 import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
 import { useTranslation } from "./hooks/useTranslation";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+// Simple in-memory cache for regional Pokémon lists
+const regionCache = new Map<number, PokemonDetails[]>();
+const clearRegionCache = () => {
+  regionCache.clear();
+};
 
 function App() {
   const { toLanguage } = useTranslation();
   const [input, setInput] = useState("");
   const [result, setResult] = useState<PokemonDataResponse | null>();
-  const [pokemonList, setPokemonList] = useState<
-    { number: number; name: PokemonName; image: string }[]
-  >([]);
+  const [pokemonList, setPokemonList] = useState<PokemonDetails[]>([]);
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingRegion, setIsLoadingRegion] = useState(false);
 
   useEffect(() => {
     async function fetchPokemon() {
+      // Check cache first
+      if (regionCache.has(regionIndex)) {
+        setPokemonList(regionCache.get(regionIndex)!);
+        return;
+      }
+
       setIsLoadingRegion(true);
       try {
         const results = await fetchPokemonByRegion(
@@ -67,12 +75,15 @@ function App() {
             };
           }),
         );
+
+        regionCache.set(regionIndex, details);
         setPokemonList(details);
         setIsLoadingRegion(false);
       } catch (error) {
         console.error("Error fetching Pokémon by region: ", error);
         setPokemonList([]);
         setIsLoadingRegion(false);
+        clearRegionCache();
         return;
       }
     }

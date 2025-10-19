@@ -25,3 +25,9 @@ export type Region = {
   start: number;
   end: number;
 };
+
+export type PokemonDetails = {
+  number: number;
+  name: PokemonName;
+  image: string;
+};
