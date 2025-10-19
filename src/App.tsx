@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { InfoBox } from "./components/InfoBox";
 import { PokemonGallery } from "./components/PokemonGallery";
 import { RegionSelector } from "./components/RegionSelector";
 import { LanguageSelector } from "./components/LanguageSelector";
 import type { PokemonDataResponse, PokemonDetails, SpeciesData } from "./types";
 import {
+  fetchMusic,
   fetchPokemonByRegion,
   fetchPokemonDetails,
   fetchSpeciesDetails,
@@ -31,9 +32,24 @@ function App() {
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingRegion, setIsLoadingRegion] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    async function fetchPokemon() {
+    const loadBackgroundMusic = async () => {
+      const audioSource = await fetchMusic(API_URL);
+      if (audioRef.current) {
+        audioRef.current.src = audioSource;
+        audioRef.current.volume = 0.5;
+        audioRef.current.autoplay = true;
+        audioRef.current.loop = true;
+      }
+    };
+
+    loadBackgroundMusic();
+  }, []);
+
+  useEffect(() => {
+    const fetchPokemon = async () => {
       // Check cache first
       if (regionCache.has(regionIndex)) {
         setPokemonList(regionCache.get(regionIndex)!);
@@ -46,6 +62,7 @@ function App() {
           REGIONS[regionIndex].start,
           REGIONS[regionIndex].end,
         );
+
         const details = await Promise.all(
           results.map(async (poke: { name: string; url: string }) => {
             const pokemonData = await fetchPokemonDetails(poke.url);
@@ -86,10 +103,20 @@ function App() {
         clearRegionCache();
         return;
       }
-    }
+    };
 
     fetchPokemon();
   }, [regionIndex]);
+
+  const startStopAudio = () => {
+    if (audioRef.current) {
+      if (audioRef.current.paused) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  };
 
   const handleTranslateName = (name: string) => {
     setInput(name);
@@ -112,7 +139,11 @@ function App() {
 
   return (
     <div className="dark:text-primary-content">
+      <audio ref={audioRef} />
       <Header />
+      <button className="btn" onClick={startStopAudio}>
+        Play/Stop BG Music
+      </button>
       <main className="bg-app-background dark:bg-app-background-dark flex min-h-screen flex-col items-center justify-center p-4">
         <NameSearchBar
           input={input}

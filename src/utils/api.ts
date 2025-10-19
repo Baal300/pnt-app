@@ -13,6 +13,13 @@ export async function fetchPokemonByRegion(start: number, end: number) {
   const res = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${end - start + 1}&offset=${start - 1}`,
   );
+
+  if (!res.ok) {
+    throw new Error(
+      `Error fetching Pokémon by region: ${res.status} ${res.statusText}`,
+    );
+  }
+
   const data = await res.json();
   return data.results;
 }
@@ -26,6 +33,17 @@ export async function fetchSpeciesDetails(speciesUrl: string) {
   const res = await fetch(speciesUrl);
   return await res.json();
 }
+
+export const fetchMusic = async (API_URL: string) => {
+  const res = await fetch(`${API_URL}/api/music/1`);
+  return createAudioObjectURL(res);
+};
+
+const createAudioObjectURL = async (response: Response) => {
+  const blob = await response.blob();
+  const audioUrl = URL.createObjectURL(blob);
+  return audioUrl;
+};
 
 export async function translatePokemonName(
   name: string,
