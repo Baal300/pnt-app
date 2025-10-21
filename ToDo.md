@@ -1,4 +1,4 @@
 # ToDos
 
-- Add music
-- Set up linting
+- Prevent system theme changing colors of page
+- Change loading indicator to pokeball
