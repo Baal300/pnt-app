@@ -1,13 +1,8 @@
 import React from "react";
-
-type Regions = {
-  name: string;
-  start: number;
-  end: number;
-}[];
+import type { Region } from "../types";
 
 type RegionSelectorProps = {
-  regions: Regions;
+  regions: Region[];
   setRegionIndex: React.Dispatch<React.SetStateAction<number>>;
   regionIndex: number;
 };
@@ -17,6 +12,10 @@ export const RegionSelector = ({
   setRegionIndex,
   regionIndex,
 }: RegionSelectorProps) => {
+  const handleRegionSelect = (region: Region) => {
+    setRegionIndex(regions.indexOf(region));
+  };
+
   return (
     <ul className="menu my-4 w-full max-w-xs">
       {regions.map((region, index) => (
@@ -29,7 +28,7 @@ export const RegionSelector = ({
             } ${index === 0 ? "rounded-t-xl" : ""} ${
               index === regions.length - 1 ? "rounded-b-xl" : ""
             }`}
-            onClick={() => setRegionIndex(regions.indexOf(region))}
+            onClick={handleRegionSelect.bind(null, region)}
           >
             {region.name}
           </button>
