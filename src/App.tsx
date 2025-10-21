@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { InfoBox } from "./components/InfoBox";
 import { PokemonGallery } from "./components/PokemonGallery";
 import { RegionSelector } from "./components/RegionSelector";
 import { LanguageSelector } from "./components/LanguageSelector";
 import type { PokemonDataResponse, PokemonDetails, SpeciesData } from "./types";
 import {
-  fetchMusic,
   fetchPokemonByRegion,
   fetchPokemonDetails,
   fetchSpeciesDetails,
@@ -17,6 +16,7 @@ import { NameSearchBar } from "./components/NameSearchBar";
 import { TranslateButton } from "./components/TranslateButton";
 import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
 import { useTranslation } from "./hooks/useTranslation";
+import { MusicPlayer } from "./components/MusicPlayer";
 
 // Simple in-memory cache for regional Pokémon lists
 const regionCache = new Map<number, PokemonDetails[]>();
@@ -32,21 +32,6 @@ function App() {
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingRegion, setIsLoadingRegion] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  useEffect(() => {
-    const loadBackgroundMusic = async () => {
-      const audioSource = await fetchMusic(API_URL);
-      if (audioRef.current) {
-        audioRef.current.src = audioSource;
-        audioRef.current.volume = 0.5;
-        audioRef.current.autoplay = true;
-        audioRef.current.loop = true;
-      }
-    };
-
-    loadBackgroundMusic();
-  }, []);
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -108,16 +93,6 @@ function App() {
     fetchPokemon();
   }, [regionIndex]);
 
-  const startStopAudio = () => {
-    if (audioRef.current) {
-      if (audioRef.current.paused) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-    }
-  };
-
   const handleTranslateName = (name: string) => {
     setInput(name);
     if (name.length > 0) {
@@ -139,12 +114,9 @@ function App() {
 
   return (
     <div className="dark:text-primary-content">
-      <audio ref={audioRef} />
       <Header />
-      <button className="btn" onClick={startStopAudio}>
-        Play/Stop BG Music
-      </button>
       <main className="bg-app-background dark:bg-app-background-dark flex min-h-screen flex-col items-center justify-center p-4">
+        <MusicPlayer />
         <NameSearchBar
           input={input}
           setInput={setInput}
