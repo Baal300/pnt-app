@@ -7,6 +7,11 @@
   --color-primary-content: rgb(250, 249, 250);
 }
 
+@plugin "daisyui" {
+  /* disable daisyui applying dark mode theme */
+  themes: light --default --prefersdark;
+}
+
 @theme {
   --color-mint-500: oklch(0.72 0.11 178);
   --color-primary: var(--color-blue-500);
@@ -15,4 +20,5 @@
   --breakpoint-xs: 23rem;
 }
 
+/* Enable manually applying custom dark theme */
 @custom-variant dark (&:where(.dark, .dark *));

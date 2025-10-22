@@ -1,3 +1,5 @@
+import { useTheme } from "../hooks/useTheme";
+
 type ToggleDarkModeButtonProps = {
   className?: string;
 };
@@ -5,16 +7,7 @@ type ToggleDarkModeButtonProps = {
 export const ToggleDarkModeButton = ({
   className,
 }: ToggleDarkModeButtonProps) => {
-  const handleToggle = () => {
-    const htmlElement = document.documentElement;
-    if (htmlElement.classList.contains("dark")) {
-      htmlElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
-      htmlElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
-  };
+  const { toggleTheme } = useTheme();
 
   return (
     <label className={`flex cursor-pointer gap-2 ${className} items-center`}>
@@ -36,7 +29,7 @@ export const ToggleDarkModeButton = ({
         type="checkbox"
         value="synthwave"
         className="toggle theme-controller border-gray-300 bg-white text-gray-600 checked:bg-cyan-800 checked:text-white"
-        onChange={handleToggle}
+        onChange={toggleTheme}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
