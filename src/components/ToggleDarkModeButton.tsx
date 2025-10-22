@@ -7,7 +7,7 @@ type ToggleDarkModeButtonProps = {
 export const ToggleDarkModeButton = ({
   className,
 }: ToggleDarkModeButtonProps) => {
-  const { toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <label className={`flex cursor-pointer gap-2 ${className} items-center`}>
@@ -30,6 +30,7 @@ export const ToggleDarkModeButton = ({
         value="synthwave"
         className="toggle theme-controller border-gray-300 bg-white text-gray-600 checked:bg-cyan-800 checked:text-white"
         onChange={toggleTheme}
+        checked={theme === "dark"}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
