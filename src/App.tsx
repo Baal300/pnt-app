@@ -19,6 +19,7 @@ import { useTranslation } from "./hooks/useTranslation";
 import { MusicPlayer } from "./components/MusicPlayer";
 
 // Simple in-memory cache for regional Pokémon lists
+const MAX_CACHE_SIZE = 10;
 const regionCache = new Map<number, PokemonDetails[]>();
 const clearRegionCache = () => {
   regionCache.clear();
@@ -78,7 +79,15 @@ function App() {
           }),
         );
 
+        if (regionCache.size >= MAX_CACHE_SIZE) {
+          const firstKey = regionCache.keys().next().value;
+          if (firstKey !== undefined) {
+            regionCache.delete(firstKey);
+
+          }
+        }
         regionCache.set(regionIndex, details);
+
         setPokemonList(details);
         setIsLoadingRegion(false);
       } catch (error) {
