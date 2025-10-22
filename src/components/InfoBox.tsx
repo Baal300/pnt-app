@@ -31,7 +31,7 @@ export const InfoBox = ({ pokemonData, isLoading }: InfoBoxProps) => {
           />
         )}
       </div>
-      <p className="absolute top-[450px] left-0 w-full text-center text-lg font-semibold">
+      <p className="dark:text-base-content absolute top-[450px] left-0 w-full text-center font-mono text-2xl font-bold">
         {pokemonName}
       </p>
       {isLoading && (
