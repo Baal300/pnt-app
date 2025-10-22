@@ -4,13 +4,15 @@ import { API_URL } from "../constants/constants";
 
 export const MusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [volume, setVolume] = useState(0.5);
+  const defaultVolume = 0.3;
+  const [volume, setVolume] = useState(defaultVolume);
 
   useEffect(() => {
     const loadBackgroundMusic = async () => {
       const audioSource = await fetchMusic(API_URL);
       if (audioRef.current && audioSource) {
         audioRef.current.src = audioSource;
+        audioRef.current.volume = defaultVolume;
         audioRef.current.autoplay = true;
         audioRef.current.loop = true;
       } else {
