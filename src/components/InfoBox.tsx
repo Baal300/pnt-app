@@ -1,4 +1,6 @@
-import pkmnUI from "../assets/Pkmn_ruby_ui.png";
+import PokemonUI from "../assets/Pkmn_ruby_ui.png";
+import PokeballImage from "../assets/Poke_Ball_ZA_Art.png";
+
 import type { PokemonDataResponse } from "../types";
 
 type InfoBoxProps = {
@@ -16,7 +18,7 @@ export const InfoBox = ({ pokemonData, isLoading }: InfoBoxProps) => {
     <div
       className="relative flex h-[651px] w-[330px]"
       style={{
-        backgroundImage: `url(${pkmnUI})`,
+        backgroundImage: `url(${PokemonUI})`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -36,8 +38,9 @@ export const InfoBox = ({ pokemonData, isLoading }: InfoBoxProps) => {
       </p>
       {isLoading && (
         <div className="absolute inset-0 top-[200px] my-4 flex justify-center">
-          <div className="h-16 w-16 animate-spin rounded-full border-t-3 border-b-3 border-t-red-500 border-b-white"></div>
-          <span className="ml-2 text-blue-500">Translating...</span>
+          <div className="h-32 w-32 animate-spin">
+            <img src={PokeballImage} alt="Loading Pokemon"></img>
+          </div>
         </div>
       )}
     </div>
