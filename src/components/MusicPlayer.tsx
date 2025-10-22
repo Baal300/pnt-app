@@ -45,9 +45,8 @@ export const MusicPlayer = () => {
       <audio ref={audioRef} />
       <div className="join bg-base-200 rounded-box h-15 w-70 items-center gap-2 p-2 dark:bg-slate-700">
         <button
-          className="btn btn-circle btn-secondary"
+          className="btn btn-circle btn-secondary join-item"
           onClick={startStopAudio}
-          join-item
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
