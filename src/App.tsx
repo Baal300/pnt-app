@@ -31,7 +31,7 @@ function App() {
   const [result, setResult] = useState<PokemonDataResponse | null>();
   const [pokemonList, setPokemonList] = useState<PokemonDetails[]>([]);
   const [regionIndex, setRegionIndex] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingTranslation, setIsLoadingTranslation] = useState(false);
   const [isLoadingRegion, setIsLoadingRegion] = useState(false);
 
   useEffect(() => {
@@ -83,7 +83,6 @@ function App() {
           const firstKey = regionCache.keys().next().value;
           if (firstKey !== undefined) {
             regionCache.delete(firstKey);
-
           }
         }
         regionCache.set(regionIndex, details);
@@ -105,27 +104,28 @@ function App() {
   const handleTranslateName = (name: string) => {
     setInput(name);
     if (name.length > 0) {
-      setIsLoading(true);
+      setIsLoadingTranslation(true);
       try {
         translatePokemonName(name, toLanguage, API_URL)
           .then(setResult)
-          .finally(() => setIsLoading(false));
+          .finally(() => setIsLoadingTranslation(false));
       } catch (error) {
         console.error("Error translating Pokémon name:", error);
         setResult(null);
-        setIsLoading(false);
+        setIsLoadingTranslation(false);
       }
     } else {
       setResult(null);
-      setIsLoading(false);
+      setIsLoadingTranslation(false);
     }
   };
 
   return (
     <div className="dark:text-primary-content">
       <Header />
-      <main className="bg-app-background dark:bg-app-background-dark flex min-h-screen flex-col items-center justify-center p-4">
+      <main className="bg-app-background dark:bg-app-background-dark from-app-background flex min-h-screen flex-col items-center justify-center p-4">
         <MusicPlayer />
+        <InfoBox pokemonData={result} isLoading={isLoadingTranslation} />
         <NameSearchBar
           input={input}
           setInput={setInput}
@@ -137,15 +137,11 @@ function App() {
           <LanguageSelector isLanguageTranslatedFrom={false} />
         </div>
         <TranslateButton input={input} onClick={handleTranslateName} />
-
-        <InfoBox pokemonData={result} isLoading={isLoading} />
-
         <RegionSelector
           regions={REGIONS}
           setRegionIndex={setRegionIndex}
           regionIndex={regionIndex}
         />
-
         <h2 className="mt-8 mb-4 text-2xl font-bold">Pokémon Gallery</h2>
         <h3 className="mb-2 text-lg font-semibold">
           {REGIONS[regionIndex].name}
