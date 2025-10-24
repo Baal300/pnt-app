@@ -67,8 +67,8 @@ export const NameSearchBar = ({
   };
 
   return (
-    <div className="mt-2 mb-2 flex w-full flex-col items-center">
-      <label className="input w-full max-w-[32rem] min-w-[20rem] dark:border-gray-300 dark:bg-gray-700 dark:text-white">
+    <div className="relative mt-2 mb-2 flex w-full flex-col items-center">
+      <label className="input w-full max-w-[32rem] min-w-[18rem] dark:border-gray-300 dark:bg-gray-700 dark:text-white">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"

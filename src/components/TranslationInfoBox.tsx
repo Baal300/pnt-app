@@ -2,13 +2,23 @@ import PokemonUI from "../assets/Pkmn_ruby_ui.png";
 import PokeballImage from "../assets/Poke_Ball_ZA_Art.png";
 
 import type { PokemonDataResponse } from "../types";
+import { NameSearchBar } from "./NameSearchBar";
 
-type InfoBoxProps = {
+type TranslationInfoBoxProps = {
   pokemonData?: PokemonDataResponse | null;
   isLoading?: boolean;
+  input: string;
+  setInput: (input: string) => void;
+  onTranslateName: (name: string) => void;
 };
 
-export const InfoBox = ({ pokemonData, isLoading }: InfoBoxProps) => {
+export const TranslationInfoBox = ({
+  pokemonData,
+  isLoading,
+  input,
+  setInput,
+  onTranslateName,
+}: TranslationInfoBoxProps) => {
   let pokemonName = pokemonData?.translated || "";
   if (pokemonData === null) {
     pokemonName = "Can't find Pokémon";
@@ -16,7 +26,7 @@ export const InfoBox = ({ pokemonData, isLoading }: InfoBoxProps) => {
 
   return (
     <div
-      className="relative flex h-[651px] w-[330px]"
+      className="relative flex h-[620px] w-[330px] p-1"
       style={{
         backgroundImage: `url(${PokemonUI})`,
         backgroundSize: "contain",
@@ -43,6 +53,13 @@ export const InfoBox = ({ pokemonData, isLoading }: InfoBoxProps) => {
           </div>
         </div>
       )}
+      <div className="absolute bottom-10 flex w-full justify-center px-4">
+        <NameSearchBar
+          input={input}
+          setInput={setInput}
+          onTranslateName={onTranslateName}
+        />
+      </div>
     </div>
   );
 };

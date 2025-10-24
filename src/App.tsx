@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { InfoBox } from "./components/InfoBox";
+import { TranslationInfoBox } from "./components/TranslationInfoBox";
 import { PokemonGallery } from "./components/PokemonGallery";
 import { RegionSelector } from "./components/RegionSelector";
 import { LanguageSelector } from "./components/LanguageSelector";
@@ -11,7 +11,6 @@ import {
 } from "./utils/api";
 import { API_URL, REGIONS } from "./constants/constants";
 import { Header } from "./components/Header";
-import { NameSearchBar } from "./components/NameSearchBar";
 import { TranslateButton } from "./components/TranslateButton";
 import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
 import { useTranslation } from "./hooks/useTranslation";
@@ -96,12 +95,14 @@ function App() {
       <Header />
       <main className="bg-app-background dark:bg-app-background-dark from-app-background flex min-h-screen flex-col items-center justify-center p-4">
         <MusicPlayer />
-        <InfoBox pokemonData={result} isLoading={isLoadingTranslation} />
-        <NameSearchBar
+        <TranslationInfoBox
+          pokemonData={result}
+          isLoading={isLoadingTranslation}
           input={input}
           setInput={setInput}
           onTranslateName={handleTranslateName}
         />
+
         <div className="join m-2 items-center gap-0.5">
           <LanguageSelector isLanguageTranslatedFrom />
           <SwitchLanguageButton />

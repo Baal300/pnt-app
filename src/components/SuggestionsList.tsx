@@ -22,7 +22,7 @@ export const SuggestionsList = ({
 
   return (
     suggestions.length > 0 && (
-      <div className="dark:bg-gray-700dark:text-white mb-2 w-full max-w-xs rounded border bg-white shadow dark:border-gray-300 dark:bg-gray-700 dark:text-white">
+      <div className="absolute top-full z-1 mb-2 w-full max-w-xs rounded border bg-white shadow dark:border-gray-300 dark:bg-gray-700 dark:text-white">
         <ul className="m-0 list-none p-0">
           {suggestions.map((name, index) => (
             <li
