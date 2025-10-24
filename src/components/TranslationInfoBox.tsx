@@ -26,7 +26,7 @@ export const TranslationInfoBox = ({
 
   return (
     <div
-      className="relative flex h-[620px] w-[330px] p-1 drop-shadow-lg"
+      className="relative z-1 flex h-[620px] w-[330px] p-1 drop-shadow-lg"
       style={{
         backgroundImage: `url(${PokemonUI})`,
         backgroundSize: "contain",
