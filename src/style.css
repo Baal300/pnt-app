@@ -18,6 +18,7 @@
   --color-app-background: rgb(221, 224, 242);
   --color-app-background-dark: rgb(44, 32, 65);
   --breakpoint-xs: 23rem;
+  --text-tiny: 0.625rem;
 }
 
 /* Enable manually applying custom dark theme */

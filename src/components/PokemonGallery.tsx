@@ -5,27 +5,33 @@ type PokemonGalleryProps = {
 };
 
 export const PokemonGallery = ({ pokemonList }: PokemonGalleryProps) => (
-  <div className="xs:grid-cols-3 grid grid-cols-2 gap-4 sm:grid-cols-5 lg:grid-cols-7">
+  <div className="xs:grid-cols-3 grid grid-cols-2 gap-3 sm:grid-cols-5 lg:grid-cols-7">
     {pokemonList.map((poke) => (
       <div
         key={poke.number}
-        className="mb-2 flex w-28 flex-col items-center text-center text-sm"
+        className="card border-accent mb-2 w-32 flex-col items-center border bg-linear-to-br from-lime-700 to-green-500 text-center text-xs sm:text-lg dark:from-green-900 dark:to-green-600"
       >
         <img
           src={poke.image}
           alt={poke.name.english}
-          className="h-24 w-24 border-1 bg-amber-100"
+          className="border-accent mx-2 mt-3 h-24 w-24 border-1 bg-amber-100"
         />
-        <span className="mt-1 font-bold">#{poke.number}</span>
-        <span className="mt-0.25 font-bold">
-          {poke.name.english || "MISSINGNO"} (EN)
-        </span>
-        <span className="mt-0.25 font-bold">
-          {poke.name.german || "MISSINGNO"} (DE)
-        </span>
-        <span className="mt-0.25 font-bold">
-          {poke.name.japanese || "MISSINGNO"} (JP)
-        </span>
+
+        <div className="card-body join join-vertical gap-0 p-2 text-shadow-sm">
+          <span className="join-item">#{poke.number}</span>
+          <span className="join-item font-semibold">
+            {poke.name.english || "MISSINGNO"}{" "}
+            <span className="text-tiny">(EN)</span>
+          </span>
+          <span className="join-item font-semibold">
+            {poke.name.german || "MISSINGNO"}{" "}
+            <span className="text-tiny">(DE)</span>
+          </span>
+          <span className="join-item font-semibold">
+            {poke.name.japanese || "MISSINGNO"}{" "}
+            <span className="text-tiny">(JP)</span>
+          </span>
+        </div>
       </div>
     ))}
   </div>

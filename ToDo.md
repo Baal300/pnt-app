@@ -1,4 +1,4 @@
 # ToDos
 
-- Put gallery items into cards
 - Add testing
+- Add loading skeletons for gallery
