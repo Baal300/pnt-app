@@ -6,14 +6,14 @@ type ThemeProviderProps = {
 };
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Check localStorage first, fallback to system preference
-    const saved = localStorage.getItem("app-theme") as Theme;
-    if (saved && ["light", "dark", "system"].includes(saved)) {
-      return saved;
-    }
-    return "system";
-  });
+  const savedTheme = localStorage.getItem("theme") as Theme;
+
+  const systemPrefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)",
+  ).matches;
+  const [theme, setTheme] = useState<Theme>(
+    savedTheme || (systemPrefersDark && "dark") || "light",
+  );
 
   // Listen for system theme changes
   useEffect(() => {
@@ -36,7 +36,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     root.classList.add(theme);
 
     // Store in localStorage
-    localStorage.setItem("app-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const handleSetTheme = (newTheme: Theme) => {
