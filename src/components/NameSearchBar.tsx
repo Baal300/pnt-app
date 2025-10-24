@@ -92,7 +92,6 @@ export const NameSearchBar = ({
           value={input}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          autoFocus
           onBlur={handleBlur}
         />
       </label>
