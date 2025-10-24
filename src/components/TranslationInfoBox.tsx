@@ -43,9 +43,6 @@ export const TranslationInfoBox = ({
           />
         )}
       </div>
-      <p className="dark:text-base-content absolute top-[450px] left-0 w-full text-center font-mono text-2xl font-bold">
-        {pokemonName}
-      </p>
       {isLoading && (
         <div className="absolute inset-0 top-[200px] my-4 flex justify-center">
           <div className="h-32 w-32 animate-spin">
@@ -53,6 +50,13 @@ export const TranslationInfoBox = ({
           </div>
         </div>
       )}
+      <p className="dark:text-base-content absolute top-[450px] left-0 w-full text-center font-mono text-2xl font-bold">
+        {isLoading ? (
+          <span className="loading loading-dots loading-xl"></span>
+        ) : (
+          pokemonName
+        )}
+      </p>
       <div className="absolute bottom-10 flex w-full justify-center px-4">
         <NameSearchBar
           input={input}
