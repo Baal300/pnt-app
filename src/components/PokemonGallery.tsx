@@ -9,7 +9,7 @@ export const PokemonGallery = ({ pokemonList }: PokemonGalleryProps) => (
     {pokemonList.map((poke) => (
       <div
         key={poke.number}
-        className="card border-accent m-0.5 w-28 flex-col items-center border bg-linear-to-br from-lime-700 to-green-500 text-center text-xs sm:m-1 sm:w-32 sm:text-lg dark:from-green-900 dark:to-green-600"
+        className="card border-accent dark:from-start-gradient-dark dark:to-end-gradient-dark from-start-gradient to-end-gradient m-0.5 w-28 flex-col items-center border bg-linear-to-br text-center text-xs sm:m-1 sm:w-32 sm:text-lg"
       >
         <img
           src={poke.image}

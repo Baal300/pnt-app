@@ -23,8 +23,8 @@ export const RegionSelector = ({
           <button
             className={`w-full rounded-none border p-2 font-bold hover:cursor-pointer ${
               index === regionIndex
-                ? "bg-green-700 text-white dark:bg-green-500" // Selected state
-                : "bg-green-500 hover:bg-green-400 active:bg-green-300 dark:bg-green-900 dark:hover:bg-green-800 dark:active:bg-green-700" // Normal state
+                ? "bg-green-800 text-white dark:bg-green-500" // Selected state
+                : "from-start-gradient dark:from-start-gradient to-end-gradient bg-linear-to-br hover:bg-green-400 active:bg-green-300 dark:to-green-800 dark:hover:bg-green-800 dark:active:bg-green-700" // Normal state
             } ${index === 0 ? "rounded-t-xl" : ""} ${
               index === regions.length - 1 ? "rounded-b-xl" : ""
             }`}

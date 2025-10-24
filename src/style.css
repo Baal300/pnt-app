@@ -19,6 +19,10 @@
   --color-app-background-dark: rgb(44, 32, 65);
   --breakpoint-xs: 23rem;
   --text-tiny: 0.625rem;
+  --color-start-gradient: var(--color-green-600);
+  --color-end-gradient: var(--color-lime-400);
+  --color-start-gradient-dark: var(--color-green-900);
+  --color-end-gradient-dark: var(--color-green-600);
 }
 
 /* Enable manually applying custom dark theme */
