@@ -5,11 +5,11 @@ type PokemonGalleryProps = {
 };
 
 export const PokemonGallery = ({ pokemonList }: PokemonGalleryProps) => (
-  <div className="xs:grid-cols-3 grid grid-cols-2 gap-3 sm:grid-cols-5 lg:grid-cols-7">
+  <div className="xs:grid-cols-3 grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-7">
     {pokemonList.map((poke) => (
       <div
         key={poke.number}
-        className="card border-accent mb-2 w-32 flex-col items-center border bg-linear-to-br from-lime-700 to-green-500 text-center text-xs sm:text-lg dark:from-green-900 dark:to-green-600"
+        className="card border-accent m-0.5 w-28 flex-col items-center border bg-linear-to-br from-lime-700 to-green-500 text-center text-xs sm:m-1 sm:w-32 sm:text-lg dark:from-green-900 dark:to-green-600"
       >
         <img
           src={poke.image}
