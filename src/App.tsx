@@ -109,6 +109,9 @@ function App() {
           <LanguageSelector isLanguageTranslatedFrom={false} />
         </div>
         <TranslateButton input={input} onClick={handleTranslateName} />
+
+        <div className="divider dark:divider-info"></div>
+
         <RegionSelector
           regions={REGIONS}
           setRegionIndex={setRegionIndex}
