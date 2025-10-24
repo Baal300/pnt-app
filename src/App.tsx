@@ -3,11 +3,10 @@ import { InfoBox } from "./components/InfoBox";
 import { PokemonGallery } from "./components/PokemonGallery";
 import { RegionSelector } from "./components/RegionSelector";
 import { LanguageSelector } from "./components/LanguageSelector";
-import type { PokemonDataResponse, PokemonDetails, SpeciesData } from "./types";
+import type { PokemonDataResponse, PokemonInfoData } from "./types";
 import {
+  extractPokemonInfoData,
   fetchPokemonByRegion,
-  fetchPokemonDetails,
-  fetchSpeciesDetails,
   translatePokemonName,
 } from "./utils/api";
 import { API_URL, REGIONS } from "./constants/constants";
@@ -20,7 +19,7 @@ import { MusicPlayer } from "./components/MusicPlayer";
 
 // Simple in-memory cache for regional Pokémon lists
 const MAX_CACHE_SIZE = 10;
-const regionCache = new Map<number, PokemonDetails[]>();
+const regionCache = new Map<number, PokemonInfoData[]>();
 const clearRegionCache = () => {
   regionCache.clear();
 };
@@ -29,7 +28,7 @@ function App() {
   const { toLanguage } = useTranslation();
   const [input, setInput] = useState("");
   const [result, setResult] = useState<PokemonDataResponse | null>();
-  const [pokemonList, setPokemonList] = useState<PokemonDetails[]>([]);
+  const [pokemonList, setPokemonList] = useState<PokemonInfoData[]>([]);
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [isLoadingTranslation, setIsLoadingTranslation] = useState(false);
   const [isLoadingRegion, setIsLoadingRegion] = useState(false);
@@ -44,40 +43,12 @@ function App() {
 
       setIsLoadingRegion(true);
       try {
-        const results = await fetchPokemonByRegion(
+        const pokemonList = await fetchPokemonByRegion(
           REGIONS[regionIndex].start,
           REGIONS[regionIndex].end,
         );
 
-        const details = await Promise.all(
-          results.map(async (poke: { name: string; url: string }) => {
-            const pokemonData = await fetchPokemonDetails(poke.url);
-            const speciesData: SpeciesData = await fetchSpeciesDetails(
-              pokemonData.species.url,
-            );
-
-            // Extract names in different languages
-            const english = speciesData.names.find(
-              (n) => n.language.name === "en",
-            );
-            const japanese = speciesData.names.find(
-              (n) => n.language.name === "roomaji",
-            );
-            const german = speciesData.names.find(
-              (n) => n.language.name === "de",
-            );
-
-            return {
-              number: pokemonData.id,
-              name: {
-                english: english?.name,
-                german: german?.name,
-                japanese: japanese?.name,
-              },
-              image: pokemonData.sprites.front_default,
-            };
-          }),
-        );
+        const details = await extractPokemonInfoData(pokemonList);
 
         if (regionCache.size >= MAX_CACHE_SIZE) {
           const firstKey = regionCache.keys().next().value;

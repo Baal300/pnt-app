@@ -1,7 +1,7 @@
 export type PokemonName = {
-  english: string;
-  german: string;
-  japanese: string;
+  english?: string;
+  german?: string;
+  japanese?: string;
 };
 
 export type PokemonDataResponse = {
@@ -11,7 +11,7 @@ export type PokemonDataResponse = {
   error?: string;
 };
 
-export type SpeciesData = {
+export type SpeciesNames = {
   names: { language: { name: string }; name: string }[];
 };
 
@@ -26,8 +26,13 @@ export type Region = {
   end: number;
 };
 
-export type PokemonDetails = {
+export type PokemonInfoData = {
   number: number;
   name: PokemonName;
   image: string;
+};
+
+export type PokeAPIResult = {
+  name: string;
+  url: string;
 };

@@ -1,9 +1,7 @@
+import type { PokemonInfoData } from "../types";
+
 type PokemonGalleryProps = {
-  pokemonList: {
-    number: number;
-    name: { english: string; german: string; japanese: string };
-    image: string;
-  }[];
+  pokemonList: PokemonInfoData[];
 };
 
 export const PokemonGallery = ({ pokemonList }: PokemonGalleryProps) => (
@@ -19,9 +17,15 @@ export const PokemonGallery = ({ pokemonList }: PokemonGalleryProps) => (
           className="h-24 w-24 border-1 bg-amber-100"
         />
         <span className="mt-1 font-bold">#{poke.number}</span>
-        <span className="mt-0.25 font-bold">{poke.name.english} (EN)</span>
-        <span className="mt-0.25 font-bold">{poke.name.german} (DE)</span>
-        <span className="mt-0.25 font-bold">{poke.name.japanese} (JP)</span>
+        <span className="mt-0.25 font-bold">
+          {poke.name.english || "MISSINGNO"} (EN)
+        </span>
+        <span className="mt-0.25 font-bold">
+          {poke.name.german || "MISSINGNO"} (DE)
+        </span>
+        <span className="mt-0.25 font-bold">
+          {poke.name.japanese || "MISSINGNO"} (JP)
+        </span>
       </div>
     ))}
   </div>

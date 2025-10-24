@@ -1,4 +1,8 @@
-import type { PokemonDataResponse } from "../types";
+import type {
+  PokemonDataResponse,
+  SpeciesNames,
+  PokeAPIResult,
+} from "../types";
 
 export async function fetchPokemonNames(): Promise<string[]> {
   try {
@@ -27,7 +31,8 @@ export async function fetchPokemonByRegion(start: number, end: number) {
       );
     }
     const data = await res.json();
-    return data.results;
+    const results: PokeAPIResult[] = data.results;
+    return results;
   } catch (error) {
     console.error("Error fetching Pokémon by region:", error);
     return [];
@@ -88,3 +93,31 @@ export async function translatePokemonName(
     return null;
   }
 }
+
+export const extractPokemonInfoData = async (pokemonList: PokeAPIResult[]) => {
+  return Promise.all(
+    pokemonList.map(async (poke) => {
+      const pokemonData = await fetchPokemonDetails(poke.url);
+      const speciesData: SpeciesNames = await fetchSpeciesDetails(
+        pokemonData.species.url,
+      );
+
+      // Extract names in different languages
+      const english = speciesData.names.find((n) => n.language.name === "en");
+      const japanese = speciesData.names.find(
+        (n) => n.language.name === "roomaji",
+      );
+      const german = speciesData.names.find((n) => n.language.name === "de");
+
+      return {
+        number: pokemonData.id,
+        name: {
+          english: english?.name,
+          german: german?.name,
+          japanese: japanese?.name,
+        },
+        image: pokemonData.sprites.front_default,
+      };
+    }),
+  );
+};
