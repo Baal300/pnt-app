@@ -20,15 +20,13 @@ export const PokemonGallery = ({ pokemonList }: PokemonGalleryProps) => (
         <div className="card-body join join-vertical gap-0 p-2 text-shadow-sm">
           <span className="join-item">#{poke.number}</span>
           <span className="join-item font-semibold">
-            {poke.name.english || "MISSINGNO"}{" "}
-            <span className="text-tiny">(EN)</span>
+            {poke.name.english || "N/A"} <span className="text-tiny">(EN)</span>
           </span>
           <span className="join-item font-semibold">
-            {poke.name.german || "MISSINGNO"}{" "}
-            <span className="text-tiny">(DE)</span>
+            {poke.name.german || "N/A"} <span className="text-tiny">(DE)</span>
           </span>
           <span className="join-item font-semibold">
-            {poke.name.japanese || "MISSINGNO"}{" "}
+            {poke.name.japanese || "N/A"}{" "}
             <span className="text-tiny">(JP)</span>
           </span>
         </div>
