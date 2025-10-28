@@ -1,7 +1,8 @@
+import { useEffect, useRef } from "react";
 import PokemonUI from "../assets/Pkmn_ruby_ui.png";
 import PokeballImage from "../assets/Poke_Ball_ZA_Art.png";
 
-import type { PokemonDataResponse } from "../types";
+import type { PokemonDataResponse } from "../types/types";
 import { NameSearchBar } from "./NameSearchBar";
 
 type TranslationInfoBoxProps = {
@@ -10,6 +11,7 @@ type TranslationInfoBoxProps = {
   input: string;
   setInput: (input: string) => void;
   onTranslateName: (name: string) => void;
+  crySoundObjectURL?: string;
 };
 
 export const TranslationInfoBox = ({
@@ -18,8 +20,20 @@ export const TranslationInfoBox = ({
   input,
   setInput,
   onTranslateName,
+  crySoundObjectURL,
 }: TranslationInfoBoxProps) => {
+  const audioRef = useRef<HTMLAudioElement>(null);
   let pokemonName = pokemonData?.translated || "";
+
+  useEffect(() => {
+    if (audioRef.current && crySoundObjectURL) {
+      audioRef.current.src = crySoundObjectURL;
+      audioRef.current.play().catch((error) => {
+        console.error("Error playing audio:", error);
+      });
+    }
+  }, [crySoundObjectURL]);
+
   if (pokemonData === null) {
     pokemonName = "Can't find Pokémon";
   }
@@ -34,6 +48,7 @@ export const TranslationInfoBox = ({
         backgroundRepeat: "no-repeat",
       }}
     >
+      <audio ref={audioRef}></audio>
       <div className="absolute inset-0 top-[150px] flex justify-center">
         {pokemonData?.image && !isLoading && (
           <img

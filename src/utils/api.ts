@@ -2,7 +2,7 @@ import type {
   PokemonDataResponse,
   SpeciesNames,
   PokeAPIResult,
-} from "../types";
+} from "../types/types";
 
 export async function fetchPokemonNames(): Promise<string[]> {
   try {
@@ -59,13 +59,23 @@ export async function fetchSpeciesDetails(speciesUrl: string) {
   }
 }
 
-export const fetchMusic = async (API_URL: string) => {
+export const fetchMusic = async (apiLocation: string) => {
   try {
-    const res = await fetch(`${API_URL}/api/music/1`);
+    const res = await fetch(`${apiLocation}/api/music/1`);
     return createAudioObjectURL(res);
   } catch (error) {
     console.error("Error fetching music:", error);
-    return null;
+    return "";
+  }
+};
+
+export const fetchCrySound = async (pokemonId: number, apiLocation: string) => {
+  try {
+    const res = await fetch(`${apiLocation}/api/cries/${pokemonId}`);
+    return createAudioObjectURL(res);
+  } catch (error) {
+    console.error("Error fetching cry sound:", error);
+    return "";
   }
 };
 
@@ -87,7 +97,10 @@ export async function translatePokemonName(
     if (!res.ok) {
       throw new Error(`Translation API error: ${res.status} ${res.statusText}`);
     }
-    return await res.json();
+
+    const data: PokemonDataResponse = await res.json();
+
+    return data;
   } catch (error) {
     console.error("Error fetching translation:", error);
     return null;

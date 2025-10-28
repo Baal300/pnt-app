@@ -1,4 +1,4 @@
-import type { PokemonInfoData } from "../types";
+import type { PokemonInfoData } from "../types/types";
 
 import { PokemonCard } from "./PokemonCard";
 

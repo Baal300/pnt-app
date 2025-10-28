@@ -5,7 +5,7 @@ export type PokemonName = {
 };
 
 export type PokemonDataResponse = {
-  original: string;
+  number: number;
   translated: string;
   image: string;
   error?: string;
@@ -35,4 +35,10 @@ export type PokemonInfoData = {
 export type PokeAPIResult = {
   name: string;
   url: string;
+};
+
+export type APIResponseError = {
+  number: number;
+  translated: string;
+  image: string;
 };

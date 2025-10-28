@@ -3,9 +3,10 @@ import { TranslationInfoBox } from "./components/TranslationInfoBox";
 import { PokemonGallery } from "./components/PokemonGallery";
 import { RegionSelector } from "./components/RegionSelector";
 import { LanguageSelector } from "./components/LanguageSelector";
-import type { PokemonDataResponse, PokemonInfoData } from "./types";
+import type { PokemonDataResponse, PokemonInfoData } from "./types/types";
 import {
   extractPokemonInfoData,
+  fetchCrySound,
   fetchPokemonByRegion,
   translatePokemonName,
 } from "./utils/api";
@@ -27,6 +28,7 @@ function App() {
   const { toLanguage } = useTranslation();
   const [input, setInput] = useState("");
   const [result, setResult] = useState<PokemonDataResponse | null>();
+  const [crySoundObjectURL, setSoundObjectURL] = useState<string>("");
   const [pokemonList, setPokemonList] = useState<PokemonInfoData[]>([]);
   const [regionIndex, setRegionIndex] = useState<number>(0);
   const [isLoadingTranslation, setIsLoadingTranslation] = useState(false);
@@ -71,14 +73,19 @@ function App() {
     fetchPokemon();
   }, [regionIndex]);
 
-  const handleTranslateName = (name: string) => {
+  const handleTranslateName = async (name: string) => {
     setInput(name);
     if (name.length > 0) {
       setIsLoadingTranslation(true);
       try {
-        translatePokemonName(name, toLanguage, API_URL)
-          .then(setResult)
-          .finally(() => setIsLoadingTranslation(false));
+        const result = await translatePokemonName(name, toLanguage, API_URL);
+        setResult(result);
+        setIsLoadingTranslation(false);
+
+        if (result) {
+          const crySound = await fetchCrySound(result.number, API_URL);
+          setSoundObjectURL(crySound);
+        }
       } catch (error) {
         console.error("Error translating Pokémon name:", error);
         setResult(null);
@@ -101,6 +108,7 @@ function App() {
           input={input}
           setInput={setInput}
           onTranslateName={handleTranslateName}
+          crySoundObjectURL={crySoundObjectURL}
         />
 
         <div className="join m-2 items-center gap-0.5">

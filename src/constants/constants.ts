@@ -1,4 +1,4 @@
-import type { Pokemon, Region } from "../types";
+import type { Pokemon, Region } from "../types/types";
 import germanPokemonNames from "../data/pkmn_german.json";
 import regionsData from "../data/regions.json";
 
