@@ -5,6 +5,7 @@ import type { PokemonDataResponse } from "../types/types";
 import { NameSearchBar } from "./NameSearchBar";
 import VolumeIcon from "../assets/volume_up_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 import MutedIcon from "../assets/no_sound_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
+import { PokemonInfoModal } from "./PokemonInfoModal";
 
 type TranslationInfoBoxProps = {
   pokemonData?: PokemonDataResponse | null;
@@ -26,6 +27,8 @@ export const TranslationInfoBox = ({
   const audioRef = useRef<HTMLAudioElement>(null);
   const [muted, setMuted] = useState(false);
   const cryVolume = 0.5;
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   let pokemonName = pokemonData?.translated || "";
 
   useEffect(() => {
@@ -56,62 +59,81 @@ export const TranslationInfoBox = ({
     pokemonName = "Can't find Pokémon";
   }
 
+  const handleOpenModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <div
-      className="relative z-1 flex h-[620px] w-[330px] p-1 drop-shadow-lg"
-      style={{
-        backgroundImage: `url(${PokemonUI})`,
-        backgroundSize: "contain",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <audio ref={audioRef}></audio>
-      {muted ? (
-        <button
-          className="absolute top-[100px] left-[30px] cursor-pointer"
-          onClick={handleMute}
-        >
-          <MutedIcon height={"32px"} width={"32px"} />
-        </button>
-      ) : (
-        <button
-          className="absolute top-[100px] left-[30px] cursor-pointer"
-          onClick={handleMute}
-        >
-          <VolumeIcon height={"32px"} width={"32px"} />
-        </button>
-      )}
-      <div className="onClick={handleMute} absolute inset-0 top-[150px] flex justify-center">
-        {pokemonData?.image && !isLoading && (
-          <img
-            src={pokemonData.image}
-            alt={pokemonData.translated}
-            className="h-[256px] w-[256px] object-contain"
-          />
-        )}
-      </div>
-      {isLoading && (
-        <div className="absolute inset-0 top-[200px] my-4 flex justify-center">
-          <div className="h-32 w-32 animate-spin">
-            <img src={PokeballImage} alt="Loading Pokemon"></img>
-          </div>
-        </div>
-      )}
-      <p className="dark:text-base-content absolute top-[450px] left-0 w-full text-center font-mono text-2xl font-bold">
-        {isLoading ? (
-          <span className="loading loading-dots loading-xl"></span>
+    <>
+      <div
+        className="relative z-1 flex h-[620px] w-[330px] p-1 drop-shadow-lg"
+        style={{
+          backgroundImage: `url(${PokemonUI})`,
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <audio ref={audioRef}></audio>
+        {muted ? (
+          <button
+            className="absolute top-[100px] left-[30px] cursor-pointer"
+            onClick={handleMute}
+          >
+            <MutedIcon height={"32px"} width={"32px"} />
+          </button>
         ) : (
-          pokemonName
+          <button
+            className="absolute top-[100px] left-[30px] cursor-pointer"
+            onClick={handleMute}
+          >
+            <VolumeIcon height={"32px"} width={"32px"} />
+          </button>
         )}
-      </p>
-      <div className="absolute bottom-10 flex w-full justify-center px-4">
-        <NameSearchBar
-          input={input}
-          setInput={setInput}
-          onTranslateName={onTranslateName}
-        />
+        <div
+          onClick={handleOpenModal}
+          tabIndex={0}
+          role="button"
+          className="absolute inset-0 top-[150px] flex justify-center"
+        >
+          {pokemonData?.image && !isLoading && (
+            <img
+              src={pokemonData.image}
+              alt={pokemonData.translated}
+              className="h-[256px] w-[256px] object-contain"
+            />
+          )}
+        </div>
+        {isLoading && (
+          <div className="absolute inset-0 top-[200px] my-4 flex justify-center">
+            <div className="h-32 w-32 animate-spin">
+              <img src={PokeballImage} alt="Loading Pokemon"></img>
+            </div>
+          </div>
+        )}
+        <p className="dark:text-base-content absolute top-[450px] left-0 w-full text-center font-mono text-2xl font-bold">
+          {isLoading ? (
+            <span className="loading loading-dots loading-xl"></span>
+          ) : (
+            pokemonName
+          )}
+        </p>
+        <div className="absolute bottom-10 flex w-full justify-center px-4">
+          <NameSearchBar
+            input={input}
+            setInput={setInput}
+            onTranslateName={onTranslateName}
+          />
+        </div>
       </div>
-    </div>
+      <PokemonInfoModal
+        isOpen={modalIsOpen}
+        onRequestClose={handleCloseModal}
+      />
+    </>
   );
 };

@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { TranslationProvider } from "./providers/TranslationProvider.tsx";
 import { ThemeProvider } from "./providers/ThemeProvider.tsx";
+import Modal from "react-modal";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -13,3 +14,5 @@ createRoot(document.getElementById("root")!).render(
     </ThemeProvider>
   </StrictMode>,
 );
+
+Modal.setAppElement("#root");

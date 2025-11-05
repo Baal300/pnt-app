@@ -3,4 +3,4 @@
 - Add testing
 - Add loading skeletons for gallery
 - Add modals of detailed Pokémon info on card click
-- add pokemon sound
+- Replace react-modal with custom modal
