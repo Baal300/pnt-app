@@ -4,7 +4,7 @@ import type {
   PokeAPIResult,
 } from "../types/types";
 
-export async function fetchPokemonNames(): Promise<string[]> {
+export const fetchPokemonNames = async (): Promise<string[]> => {
   try {
     const res = await fetch(
       "https://pokeapi.co/api/v2/pokemon-species?limit=10000",
@@ -17,9 +17,9 @@ export async function fetchPokemonNames(): Promise<string[]> {
     console.error("Error fetching Pokémon names:", error);
     return [];
   }
-}
+};
 
-export async function fetchPokemonByRegion(start: number, end: number) {
+export const fetchPokemonByRegion = async (start: number, end: number) => {
   try {
     const res = await fetch(
       `https://pokeapi.co/api/v2/pokemon?limit=${end - start + 1}&offset=${start - 1}`,
@@ -37,9 +37,9 @@ export async function fetchPokemonByRegion(start: number, end: number) {
     console.error("Error fetching Pokémon by region:", error);
     return [];
   }
-}
+};
 
-export async function fetchPokemonDetails(pokeUrl: string) {
+export const fetchPokemonDetails = async (pokeUrl: string) => {
   try {
     const res = await fetch(pokeUrl);
     return await res.json();
@@ -47,9 +47,9 @@ export async function fetchPokemonDetails(pokeUrl: string) {
     console.error("Error fetching Pokémon details:", error);
     return null;
   }
-}
+};
 
-export async function fetchSpeciesDetails(speciesUrl: string) {
+export const fetchSpeciesDetails = async (speciesUrl: string) => {
   try {
     const res = await fetch(speciesUrl);
     return await res.json();
@@ -57,7 +57,7 @@ export async function fetchSpeciesDetails(speciesUrl: string) {
     console.error("Error fetching species details:", error);
     return null;
   }
-}
+};
 
 export const fetchMusic = async (apiLocation: string) => {
   try {
@@ -85,11 +85,11 @@ const createAudioObjectURL = async (response: Response) => {
   return audioUrl;
 };
 
-export async function translatePokemonName(
+export const translatePokemonName = async (
   name: string,
   lang: string,
   apiUrl: string,
-): Promise<PokemonDataResponse | null> {
+): Promise<PokemonDataResponse | null> => {
   try {
     const res = await fetch(
       `${apiUrl}/api/translate?name=${name}&lang=${lang}`,
@@ -105,7 +105,7 @@ export async function translatePokemonName(
     console.error("Error fetching translation:", error);
     return null;
   }
-}
+};
 
 export const extractPokemonInfoData = async (pokemonList: PokeAPIResult[]) => {
   return Promise.all(
