@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import PokemonUI from "../assets/Pkmn_ruby_ui.png";
 import PokeballImage from "../assets/Poke_Ball_ZA_Art.png";
-
 import type { PokemonDataResponse } from "../types/types";
 import { NameSearchBar } from "./NameSearchBar";
+import VolumeIcon from "../assets/volume_up_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
+import MutedIcon from "../assets/no_sound_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 
 type TranslationInfoBoxProps = {
   pokemonData?: PokemonDataResponse | null;
@@ -23,16 +24,33 @@ export const TranslationInfoBox = ({
   crySoundObjectURL,
 }: TranslationInfoBoxProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [muted, setMuted] = useState(false);
+  const cryVolume = 0.5;
   let pokemonName = pokemonData?.translated || "";
 
   useEffect(() => {
+    if (muted) {
+      return;
+    }
+
     if (audioRef.current && crySoundObjectURL) {
       audioRef.current.src = crySoundObjectURL;
+      audioRef.current.volume = cryVolume;
       audioRef.current.play().catch((error) => {
         console.error("Error playing audio:", error);
       });
     }
-  }, [crySoundObjectURL]);
+  }, [crySoundObjectURL, cryVolume, muted]);
+
+  const handleMute = () => {
+    if (audioRef.current) {
+      if (muted) {
+        setMuted(false);
+      } else {
+        setMuted(true);
+      }
+    }
+  };
 
   if (pokemonData === null) {
     pokemonName = "Can't find Pokémon";
@@ -49,7 +67,22 @@ export const TranslationInfoBox = ({
       }}
     >
       <audio ref={audioRef}></audio>
-      <div className="absolute inset-0 top-[150px] flex justify-center">
+      {muted ? (
+        <button
+          className="absolute top-[100px] left-[30px] cursor-pointer"
+          onClick={handleMute}
+        >
+          <MutedIcon height={"32px"} width={"32px"} />
+        </button>
+      ) : (
+        <button
+          className="absolute top-[100px] left-[30px] cursor-pointer"
+          onClick={handleMute}
+        >
+          <VolumeIcon height={"32px"} width={"32px"} />
+        </button>
+      )}
+      <div className="onClick={handleMute} absolute inset-0 top-[150px] flex justify-center">
         {pokemonData?.image && !isLoading && (
           <img
             src={pokemonData.image}
