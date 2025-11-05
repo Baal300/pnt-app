@@ -7,29 +7,42 @@ export const MusicPlayer = () => {
   const defaultVolume = 0.3;
   const [volume, setVolume] = useState(defaultVolume);
 
-  useEffect(() => {
-    const loadBackgroundMusic = async () => {
-      const audioSource = await fetchMusic(API_URL);
-      if (audioRef.current && audioSource) {
-        audioRef.current.src = audioSource;
-        audioRef.current.volume = defaultVolume;
-        audioRef.current.autoplay = true;
-        audioRef.current.loop = true;
-      } else {
-        console.error("No audio source available");
-      }
-    };
+  const loadBackgroundMusic = async () => {
+    const audioSource = await fetchMusic(API_URL);
+    if (audioRef.current && audioSource) {
+      audioRef.current.src = audioSource;
+      audioRef.current.volume = defaultVolume;
+      audioRef.current.autoplay = true;
+      audioRef.current.loop = true;
+    } else {
+      console.error("No audio source available");
+    }
+  };
 
+  useEffect(() => {
     loadBackgroundMusic();
   }, []);
 
   const startStopAudio = () => {
     if (audioRef.current) {
+      if (audioRef.current.src === "") {
+        throw new Error("No audio source");
+      }
+
       if (audioRef.current.paused) {
         audioRef.current.play();
       } else {
         audioRef.current.pause();
       }
+    }
+  };
+
+  const handlePlayPause = () => {
+    try {
+      startStopAudio();
+    } catch (error) {
+      console.error(error, "Trying to reload audio");
+      loadBackgroundMusic();
     }
   };
 
@@ -48,7 +61,7 @@ export const MusicPlayer = () => {
       <div className="join bg-base-200 rounded-box h-15 w-70 items-center gap-2 p-2 dark:bg-slate-700">
         <button
           className="btn btn-circle btn-secondary join-item"
-          onClick={startStopAudio}
+          onClick={handlePlayPause}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
