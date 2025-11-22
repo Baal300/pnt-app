@@ -92,7 +92,7 @@ export const translatePokemonName = async (
 ): Promise<PokemonDataResponse | null> => {
   try {
     const res = await fetch(
-      `${apiUrl}/api/translate?name=${name}&lang=${lang}`,
+      `${apiUrl}/api/translations/${name}?lang=${lang}`,
     );
     if (!res.ok) {
       throw new Error(`Translation API error: ${res.status} ${res.statusText}`);
