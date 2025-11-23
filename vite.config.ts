@@ -5,9 +5,9 @@ import svgr from "vite-plugin-svgr";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), svgr()],
-  base: "/pnt-app/",
-  server: {
-    port: 3000,
-  },
+    plugins: [react(), tailwindcss(), svgr()],
+    base: "/pnt-app/",
+    server: {
+        port: 3000,
+    },
 });

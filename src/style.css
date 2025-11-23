@@ -2,27 +2,27 @@
 @plugin "daisyui";
 
 @plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  --color-primary-content: rgb(250, 249, 250);
+    name: "light";
+    default: true;
+    --color-primary-content: rgb(250, 249, 250);
 }
 
 @plugin "daisyui" {
-  /* disable daisyui applying dark mode theme */
-  themes: light --default --prefersdark;
+    /* disable daisyui applying dark mode theme */
+    themes: light --default --prefersdark;
 }
 
 @theme {
-  --color-mint-500: oklch(0.72 0.11 178);
-  --color-primary: var(--color-blue-500);
-  --color-app-background: rgb(221, 224, 242);
-  --color-app-background-dark: rgb(44, 32, 65);
-  --breakpoint-xs: 23rem;
-  --text-tiny: 0.625rem;
-  --color-start-gradient: var(--color-green-600);
-  --color-end-gradient: var(--color-lime-400);
-  --color-start-gradient-dark: var(--color-green-900);
-  --color-end-gradient-dark: var(--color-green-600);
+    --color-mint-500: oklch(0.72 0.11 178);
+    --color-primary: var(--color-blue-500);
+    --color-app-background: rgb(221, 224, 242);
+    --color-app-background-dark: rgb(44, 32, 65);
+    --breakpoint-xs: 23rem;
+    --text-tiny: 0.625rem;
+    --color-start-gradient: var(--color-green-600);
+    --color-end-gradient: var(--color-lime-400);
+    --color-start-gradient-dark: var(--color-green-900);
+    --color-end-gradient-dark: var(--color-green-600);
 }
 
 /* Enable manually applying custom dark theme */

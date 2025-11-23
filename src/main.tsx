@@ -6,13 +6,13 @@ import { ThemeProvider } from "./providers/ThemeProvider.tsx";
 import Modal from "react-modal";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ThemeProvider>
-      <TranslationProvider>
-        <App />
-      </TranslationProvider>
-    </ThemeProvider>
-  </StrictMode>,
+    <StrictMode>
+        <ThemeProvider>
+            <TranslationProvider>
+                <App />
+            </TranslationProvider>
+        </ThemeProvider>
+    </StrictMode>,
 );
 
 Modal.setAppElement("#root");
