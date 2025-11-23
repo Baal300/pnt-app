@@ -16,6 +16,7 @@ import { TranslateButton } from "./components/TranslateButton";
 import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
 import { useTranslation } from "./hooks/useTranslation";
 import { MusicPlayer } from "./components/MusicPlayer";
+import { PokemonGallerySkeleton } from "./components/skeletons/PokemonGallerySkeleton";
 
 // Simple in-memory cache for regional Pokémon lists
 const MAX_CACHE_SIZE = 10;
@@ -139,7 +140,7 @@ function App() {
                     {REGIONS[regionIndex].name}
                 </h3>
                 {isLoadingRegion ? (
-                    <span className="loading loading-dots loading-lg"></span>
+                    <PokemonGallerySkeleton />
                 ) : (
                     <PokemonGallery pokemonList={pokemonList} />
                 )}
