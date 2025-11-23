@@ -17,7 +17,7 @@ export const PokemonCard = ({ pokemonInfo }: PokemonCardProps) => {
                 <img
                     src={pokemonInfo.image}
                     alt={pokemonInfo.name.english}
-                    className="mx-2 mt-3 min-h-24 w-full max-w-32 min-w-24 border-1 bg-amber-100 outline-1"
+                    className="mx-2 mt-3 min-h-24 w-full max-w-32 min-w-24 border-1 bg-amber-100 outline-1 md:min-h-32"
                 />
             </div>
 
