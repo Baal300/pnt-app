@@ -26,7 +26,7 @@ export const TranslationInfoBox = ({
 }: TranslationInfoBoxProps) => {
     const audioRef = useRef<HTMLAudioElement>(null);
     const [muted, setMuted] = useState(false);
-    const cryVolume = 0.5;
+    const cryVolume = 0.3;
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     let pokemonName = pokemonData?.translated || "";
