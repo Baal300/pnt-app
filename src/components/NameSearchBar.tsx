@@ -19,8 +19,6 @@ export const NameSearchBar = ({
     const maxSuggestions = 8;
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (suggestions.length === 0) return;
-
         if (e.key === "ArrowUp") {
             e.preventDefault();
             setHighlightedIndex((prev) =>
@@ -31,20 +29,20 @@ export const NameSearchBar = ({
             setHighlightedIndex((prev) =>
                 prev < suggestions.length - 1 ? prev + 1 : 0,
             );
-        } else if (highlightedIndex >= 0 && e.key === "Enter") {
-            e.preventDefault();
-
-            onTranslateName(
-                capitalizeFirstLetter(suggestions[highlightedIndex]),
-            );
-            handleBlur();
         } else if (e.key === "Enter") {
             e.preventDefault();
-            onTranslateName(input);
-            handleBlur();
+
+            if (highlightedIndex >= 0) {
+                onTranslateName(
+                    capitalizeFirstLetter(suggestions[highlightedIndex]),
+                );
+            } else {
+                onTranslateName(input);
+            }
+            handleResetSuggestions();
         } else if (e.key === "Escape") {
             e.preventDefault();
-            handleBlur();
+            handleResetSuggestions();
         }
     };
 
@@ -62,7 +60,7 @@ export const NameSearchBar = ({
         }
     };
 
-    const handleBlur = () => {
+    const handleResetSuggestions = () => {
         setTimeout(() => {
             setSuggestions([]);
             setHighlightedIndex(-1);
@@ -95,7 +93,7 @@ export const NameSearchBar = ({
                     value={input}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
-                    onBlur={handleBlur}
+                    onBlur={handleResetSuggestions}
                 />
             </label>
             <SuggestionsList
