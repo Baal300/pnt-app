@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from "../utils/string";
+import { capitalizeFirstLetter } from "../../utils/string";
 
 type SuggestionsListProps = {
     suggestions: string[];

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchMusic } from "../utils/api";
-import { API_URL } from "../constants/constants";
+import { fetchMusic } from "../../utils/api";
+import { API_URL } from "../../constants/constants";
 
 export const MusicPlayer = () => {
     const audioRef = useRef<HTMLAudioElement>(null);

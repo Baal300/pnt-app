@@ -1,5 +1,5 @@
 import { type ChangeEvent } from "react";
-import { useTranslation } from "../hooks/useTranslation";
+import { useTranslation } from "../../hooks/useTranslation";
 
 type LanguageSelectorProps = {
     isLanguageTranslatedFrom: boolean;

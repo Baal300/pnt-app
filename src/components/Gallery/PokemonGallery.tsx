@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import type { PokemonInfoData } from "../types/types";
+import type { PokemonInfoData } from "../../types/types";
 
 import { PokemonCard } from "./PokemonCard";
-import { PokemonGallerySkeleton } from "./skeletons/PokemonGallerySkeleton";
+import { PokemonGallerySkeleton } from "./PokemonGallerySkeleton";
 
 type PokemonGalleryProps = {
     pokemonList: PokemonInfoData[];

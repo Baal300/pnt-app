@@ -23,6 +23,7 @@
     --color-end-gradient: var(--color-lime-400);
     --color-start-gradient-dark: var(--color-green-900);
     --color-end-gradient-dark: var(--color-green-600);
+    --color-info-box-background: #f7faff;
 }
 
 /* Enable manually applying custom dark theme */

@@ -1,7 +1,7 @@
-import type { PokemonInfoData } from "../types/types";
-import GermanyFlag from "../assets/twemoji_flag-germany.svg?react";
-import JapanFlag from "../assets/twemoji_flag-japan.svg?react";
-import UKFlag from "../assets/twemoji_flag-united-kingdom.svg?react";
+import type { PokemonInfoData } from "../../types/types";
+import GermanyFlag from "../../assets/twemoji_flag-germany.svg?react";
+import JapanFlag from "../../assets/twemoji_flag-japan.svg?react";
+import UKFlag from "../../assets/twemoji_flag-united-kingdom.svg?react";
 
 type PokemonCardProps = {
     pokemonInfo: PokemonInfoData;

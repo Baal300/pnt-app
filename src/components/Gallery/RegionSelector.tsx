@@ -1,5 +1,5 @@
 import React from "react";
-import type { Region } from "../types/types";
+import type { Region } from "../../types/types";
 
 type RegionSelectorProps = {
     regions: Region[];

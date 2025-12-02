@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { TranslationInfoBox } from "./components/TranslationInfoBox";
-import { PokemonGallery } from "./components/PokemonGallery";
-import { RegionSelector } from "./components/RegionSelector";
-import { LanguageSelector } from "./components/LanguageSelector";
+import { TranslationInfoBox } from "./components/Translation/TranslationInfoBox";
+import { PokemonGallery } from "./components/Gallery/PokemonGallery";
+import { RegionSelector } from "./components/Gallery/RegionSelector";
+import { LanguageSelector } from "./components/Translation/LanguageSelector";
 import type { PokemonDataResponse, PokemonInfoData } from "./types/types";
 import {
     extractPokemonInfoData,
@@ -12,10 +12,10 @@ import {
 } from "./utils/api";
 import { API_URL, REGIONS } from "./constants/constants";
 import { Header } from "./components/Header";
-import { TranslateButton } from "./components/TranslateButton";
+import { TranslateButton } from "./components/Translation/TranslateButton";
 import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
 import { useTranslation } from "./hooks/useTranslation";
-import { MusicPlayer } from "./components/MusicPlayer";
+import { MusicPlayer } from "./components/Music/MusicPlayer";
 
 // Simple in-memory cache for regional Pokémon lists
 const MAX_CACHE_SIZE = 10;

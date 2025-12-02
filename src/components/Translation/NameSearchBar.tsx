@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SuggestionsList } from "./SuggestionsList";
-import { useSearch } from "../hooks/useSearch";
-import { capitalizeFirstLetter } from "../utils/string";
+import { useSearch } from "../../hooks/useSearch";
+import { capitalizeFirstLetter } from "../../utils/string";
 
 type NameSearchBarProps = {
     input: string;
