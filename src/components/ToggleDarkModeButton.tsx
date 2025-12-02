@@ -30,7 +30,7 @@ export const ToggleDarkModeButton = ({
             <input
                 type="checkbox"
                 value="synthwave"
-                className="toggle theme-controller border-gray-300 bg-white text-gray-600 checked:bg-cyan-800 checked:text-white"
+                className="toggle theme-controller border-gray-300 bg-white text-gray-600 checked:bg-purple-950 checked:text-white"
                 onChange={toggleTheme}
                 checked={theme === "dark"}
             />
