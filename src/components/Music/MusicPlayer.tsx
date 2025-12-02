@@ -77,7 +77,7 @@ export const MusicPlayer = () => {
     return (
         <div>
             <audio ref={audioRef} />
-            <div className="join bg-base-200 rounded-box h-15 w-80 items-center justify-center gap-2 p-2 dark:bg-slate-700">
+            <div className="join bg-base-200 rounded-box h-15 w-76 items-center justify-center gap-2 p-2 dark:bg-slate-700">
                 <button
                     className="btn btn-circle btn-secondary join-item"
                     onClick={handlePlayPause}
@@ -107,9 +107,7 @@ export const MusicPlayer = () => {
                         onChange={handleVolumeChange}
                     />
                 </div>
-                <span className="join-item text-xs">
-                    {Math.round(volume * 100)}
-                </span>
+
                 <button
                     className="join-item top-[100px] left-[30px] cursor-pointer"
                     onClick={handleMute}
