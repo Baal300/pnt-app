@@ -1,18 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchMusic } from "../../utils/api";
 import { API_URL } from "../../constants/constants";
+import MutedIcon from "../../assets/no_sound_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
+import VolumeIcon from "../../assets/volume_up_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 
 export const MusicPlayer = () => {
     const audioRef = useRef<HTMLAudioElement>(null);
-    const defaultVolume = 0.3;
+    const defaultVolume = 0.2;
     const [volume, setVolume] = useState(defaultVolume);
+    const [muted, setMuted] = useState(false);
 
     const loadBackgroundMusic = async () => {
         const audioSource = await fetchMusic(API_URL);
         if (audioRef.current && audioSource) {
             audioRef.current.src = audioSource;
             audioRef.current.volume = defaultVolume;
-            audioRef.current.autoplay = true;
+            audioRef.current.autoplay = false;
             audioRef.current.loop = true;
         } else {
             console.error("No audio source available");
@@ -22,6 +25,12 @@ export const MusicPlayer = () => {
     useEffect(() => {
         loadBackgroundMusic();
     }, []);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.muted = muted;
+        }
+    }, [muted]);
 
     const startStopAudio = () => {
         if (audioRef.current) {
@@ -55,10 +64,20 @@ export const MusicPlayer = () => {
         setVolume(newVolume);
     };
 
+    const handleMute = () => {
+        if (audioRef.current) {
+            if (muted) {
+                setMuted(false);
+            } else {
+                setMuted(true);
+            }
+        }
+    };
+
     return (
         <div>
             <audio ref={audioRef} />
-            <div className="join bg-base-200 rounded-box h-15 w-70 items-center gap-2 p-2 dark:bg-slate-700">
+            <div className="join bg-base-200 rounded-box h-15 w-80 items-center justify-center gap-2 p-2 dark:bg-slate-700">
                 <button
                     className="btn btn-circle btn-secondary join-item"
                     onClick={handlePlayPause}
@@ -88,8 +107,27 @@ export const MusicPlayer = () => {
                         onChange={handleVolumeChange}
                     />
                 </div>
-
-                <span className="join-item">{Math.round(volume * 100)}</span>
+                <span className="join-item text-xs">
+                    {Math.round(volume * 100)}
+                </span>
+                <button
+                    className="join-item top-[100px] left-[30px] cursor-pointer"
+                    onClick={handleMute}
+                >
+                    {muted ? (
+                        <MutedIcon
+                            height={"32px"}
+                            width={"32px"}
+                            className="dark:fill-gray-200"
+                        />
+                    ) : (
+                        <VolumeIcon
+                            height={"32px"}
+                            width={"32px"}
+                            className="dark:fill-gray-200"
+                        />
+                    )}
+                </button>
             </div>
         </div>
     );

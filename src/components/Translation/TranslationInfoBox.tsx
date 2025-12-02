@@ -26,17 +26,18 @@ export const TranslationInfoBox = ({
 }: TranslationInfoBoxProps) => {
     const audioRef = useRef<HTMLAudioElement>(null);
     const [muted, setMuted] = useState(false);
-    const cryVolume = 0.3;
+    const cryVolume = 0.2;
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     let pokemonName = pokemonData?.translated || "";
 
     useEffect(() => {
-        if (muted) {
-            return;
-        }
-
         if (audioRef.current && crySoundObjectURL) {
+            if (muted) {
+                audioRef.current.muted = true;
+                return;
+            }
+            audioRef.current.muted = false;
             audioRef.current.src = crySoundObjectURL;
             audioRef.current.volume = cryVolume;
             audioRef.current.play().catch((error) => {
@@ -81,21 +82,17 @@ export const TranslationInfoBox = ({
                 }}
             >
                 <audio ref={audioRef}></audio>
-                {muted ? (
-                    <button
-                        className="absolute top-[100px] left-[30px] cursor-pointer"
-                        onClick={handleMute}
-                    >
+                <button
+                    className="absolute top-[100px] left-[30px] cursor-pointer"
+                    onClick={handleMute}
+                >
+                    {muted ? (
                         <MutedIcon height={"32px"} width={"32px"} />
-                    </button>
-                ) : (
-                    <button
-                        className="absolute top-[100px] left-[30px] cursor-pointer"
-                        onClick={handleMute}
-                    >
+                    ) : (
                         <VolumeIcon height={"32px"} width={"32px"} />
-                    </button>
-                )}
+                    )}
+                </button>
+
                 <div
                     onClick={handleOpenModal}
                     tabIndex={0}
