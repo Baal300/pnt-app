@@ -28,7 +28,7 @@ export const PokemonGallery = ({
             {isLoading ? (
                 <PokemonGallerySkeleton />
             ) : (
-                <div className="xs:p-3 lg grid w-full grid-cols-[repeat(auto-fill,_minmax(9.25rem,_1fr))] justify-center gap-x-2 gap-y-2 md:grid-cols-[repeat(4,_minmax(9rem,_11rem))] lg:grid-cols-[repeat(6,_minmax(9rem,_11rem))]">
+                <div className="xs:p-3 lg grid w-full grid-cols-[repeat(auto-fill,_minmax(10.5rem,_1fr))] justify-center gap-x-2 gap-y-2 md:grid-cols-[repeat(4,_minmax(10.5rem,_11rem))] lg:grid-cols-[repeat(5,_minmax(10.5rem,_11rem))]">
                     {pokemonCards}
                 </div>
             )}

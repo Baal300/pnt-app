@@ -97,14 +97,26 @@ export const TranslationInfoBox = ({
                     onClick={handleOpenModal}
                     tabIndex={0}
                     role="button"
-                    className="absolute inset-0 top-[150px] flex justify-center"
+                    className={
+                        pokemonData && !isLoading
+                            ? `absolute inset-0 top-[150px] mx-auto flex h-[256px] w-[256px] cursor-pointer justify-center`
+                            : `absolute inset-0 top-[150px] mx-auto flex h-[256px] w-[256px] justify-center`
+                    }
                 >
                     {pokemonData?.image && !isLoading && (
-                        <img
-                            src={pokemonData.image}
-                            alt={pokemonData.translated}
-                            className="h-[256px] w-[256px] object-contain"
-                        />
+                        <div className="hover-3d">
+                            <figure className="h-[256px] w-[256px]">
+                                <img
+                                    src={pokemonData.image}
+                                    alt={pokemonData.translated}
+                                    className="h-[256px] w-[256px] object-contain"
+                                />
+                            </figure>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     )}
                 </div>
                 {isLoading && (
