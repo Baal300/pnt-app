@@ -6,6 +6,7 @@ import { NameSearchBar } from "./NameSearchBar";
 import VolumeIcon from "../../assets/volume_up_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 import MutedIcon from "../../assets/no_sound_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 import { PokemonInfoModal } from "../UI/PokemonInfoModal";
+import { LanguageSelectionContainer } from "./LanguageSelectionContainer";
 
 type TranslationInfoBoxProps = {
     pokemonData?: PokemonDataResponse | null;
@@ -129,19 +130,24 @@ export const TranslationInfoBox = ({
                         </div>
                     </div>
                 )}
-                <p className="dark:text-base-content absolute top-[450px] left-0 w-full text-center font-mono text-2xl font-bold">
+                <p className="dark:text-base-content absolute top-[430px] left-0 w-full text-center font-mono text-2xl font-bold">
                     {isLoading ? (
                         <span className="loading loading-dots loading-xl"></span>
                     ) : (
                         pokemonName
                     )}
                 </p>
-                <div className="absolute bottom-10 flex w-full justify-center px-4">
+
+                <div className="absolute bottom-25 left-1 flex w-full items-center justify-center px-3">
                     <NameSearchBar
                         input={input}
                         setInput={setInput}
                         onTranslateName={onTranslateName}
                     />
+                </div>
+
+                <div className="absolute bottom-5 left-0 flex w-full justify-center">
+                    <LanguageSelectionContainer />
                 </div>
             </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SuggestionsList } from "./SuggestionsList";
 import { useSearch } from "../../hooks/useSearch";
 import { capitalizeFirstLetter } from "../../utils/string";
+import { TranslateButton } from "./TranslateButton";
 
 type NameSearchBarProps = {
     input: string;
@@ -68,34 +69,42 @@ export const NameSearchBar = ({
     };
 
     return (
-        <div className="relative mt-2 mb-2 flex w-full flex-col items-center">
-            <label className="input w-full max-w-[32rem] min-w-[18rem] dark:border-gray-300 dark:bg-gray-700 dark:text-white">
-                <svg
-                    className="h-[1em] opacity-50"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                >
-                    <g
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                        strokeWidth="2.5"
-                        fill="none"
-                        stroke="currentColor"
+        <div className="relative flex w-full flex-col items-center">
+            <div className="join">
+                <label className="input join-item w-full max-w-[32rem] min-w-[12rem] dark:border-gray-300 dark:bg-gray-700 dark:text-white">
+                    <svg
+                        className="h-[1em] opacity-50"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
                     >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.3-4.3"></path>
-                    </g>
-                </svg>
-                <input
-                    className="input-lg"
-                    type="search"
-                    placeholder="Enter name"
-                    value={input}
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyDown}
-                    onBlur={handleResetSuggestions}
+                        <g
+                            strokeLinejoin="round"
+                            strokeLinecap="round"
+                            strokeWidth="2.5"
+                            fill="none"
+                            stroke="currentColor"
+                        >
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+
+                    <input
+                        className="input-lg join-item"
+                        type="search"
+                        placeholder="Enter name"
+                        value={input}
+                        onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
+                        onBlur={handleResetSuggestions}
+                    />
+                </label>
+                <TranslateButton
+                    input={input}
+                    onClick={onTranslateName}
+                    className="join-item"
                 />
-            </label>
+            </div>
             <SuggestionsList
                 suggestions={suggestions}
                 setSuggestions={setSuggestions}

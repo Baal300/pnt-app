@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { TranslationInfoBox } from "./components/Translation/TranslationInfoBox";
 import { PokemonGallery } from "./components/Gallery/PokemonGallery";
 import { RegionSelector } from "./components/Gallery/RegionSelector";
-import { LanguageSelector } from "./components/Translation/LanguageSelector";
 import type { PokemonDataResponse, PokemonInfoData } from "./types/types";
 import {
     extractPokemonInfoData,
@@ -12,8 +11,6 @@ import {
 } from "./utils/api";
 import { API_URL, REGIONS } from "./constants/constants";
 import { Header } from "./components/Header";
-import { TranslateButton } from "./components/Translation/TranslateButton";
-import { SwitchLanguageButton } from "./components/SwitchLanguageButton";
 import { useTranslation } from "./hooks/useTranslation";
 import { MusicPlayer } from "./components/Music/MusicPlayer";
 
@@ -117,13 +114,6 @@ function App() {
                     onTranslateName={handleTranslateName}
                     crySoundObjectURL={crySoundObjectURL}
                 />
-
-                <div className="join m-2 items-center gap-0.5">
-                    <LanguageSelector isLanguageTranslatedFrom />
-                    <SwitchLanguageButton />
-                    <LanguageSelector isLanguageTranslatedFrom={false} />
-                </div>
-                <TranslateButton input={input} onClick={handleTranslateName} />
 
                 <div className="divider dark:divider-info"></div>
 

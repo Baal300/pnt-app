@@ -33,7 +33,7 @@ export const LanguageSelector = ({
 
     return (
         <select
-            className="select select-lg w-full max-w-xs rounded-xl dark:border-gray-300 dark:bg-gray-700 dark:text-white"
+            className="select select-lg max-w-32 min-w-28 rounded-xl dark:border-gray-300 dark:bg-gray-700 dark:text-white"
             value={selectedLanguage}
             onChange={handleLanguageChange}
         >
