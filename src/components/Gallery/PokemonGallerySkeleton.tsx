@@ -22,6 +22,8 @@ const getResponsiveCardCount = (rows: number) => {
         columns = 3;
     } else if (width < 1024) {
         columns = 4;
+    } else if (width < 1280) {
+        columns = 5;
     } else {
         columns = 6;
     }
@@ -57,7 +59,7 @@ export const PokemonGallerySkeleton = ({
         <div
             aria-busy="true"
             aria-live="polite"
-            className="xs:p-3 lg grid w-full grid-cols-[repeat(auto-fill,_minmax(9.25rem,_1fr))] justify-center gap-x-2 gap-y-2 md:grid-cols-[repeat(4,_minmax(9rem,_11rem))] lg:grid-cols-[repeat(6,_minmax(9rem,_11rem))]"
+            className="xs:p-3 lg grid w-full grid-cols-[repeat(auto-fill,_minmax(10.5rem,_1fr))] justify-center gap-x-3 gap-y-1 md:grid-cols-[repeat(4,_10.5rem)] lg:grid-cols-[repeat(5,_10.5rem)] xl:grid-cols-[repeat(6,_10.5rem)]"
         >
             {Array.from({ length: finalCardCount }).map((_, i) => (
                 <PokemonCardSkeleton key={i} />
