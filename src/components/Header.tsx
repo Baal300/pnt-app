@@ -1,4 +1,4 @@
-import { ToggleDarkModeButton } from "./ToggleDarkModeButton";
+import { ToggleDarkModeButton } from "./UI/ToggleDarkModeButton";
 
 export const Header = () => {
     return (

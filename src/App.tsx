@@ -13,6 +13,7 @@ import { API_URL, REGIONS } from "./constants/constants";
 import { Header } from "./components/Header";
 import { useTranslation } from "./hooks/useTranslation";
 import { MusicPlayer } from "./components/Music/MusicPlayer";
+import { ScrollToTopButton } from "./components/UI/ScrollToTopButton";
 
 // Simple in-memory cache for regional Pokémon lists
 const MAX_CACHE_SIZE = 10;
@@ -128,6 +129,7 @@ function App() {
                     regionName={REGIONS[regionIndex].name}
                 />
             </main>
+            <ScrollToTopButton className="fixed right-5 bottom-5 z-10" />
         </div>
     );
 }
