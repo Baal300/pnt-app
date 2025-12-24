@@ -13,8 +13,8 @@ export const ScrollToTopButton = ({ className }: ScrollToTopButtonProps) => {
 
     const showScrollButton = () => {
         if (
-            document.body.scrollTop > 20 ||
-            document.documentElement.scrollTop > 20
+            document.body.scrollTop > 300 ||
+            document.documentElement.scrollTop > 300
         ) {
             setShowButton(true);
         } else {
