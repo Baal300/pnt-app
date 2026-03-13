@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchMusic } from "../../utils/api";
-import { API_URL } from "../../constants/constants";
+import { fetchMusic } from "../api/api";
+import { API_HOST } from "../../constants/constants";
 import MutedIcon from "../../assets/no_sound_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 import VolumeIcon from "../../assets/volume_up_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 import { PlayButton } from "./PlayButton";
@@ -13,7 +13,7 @@ export const MusicPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
 
     const loadBackgroundMusic = async () => {
-        const audioSource = await fetchMusic(API_URL);
+        const audioSource = await fetchMusic(API_HOST);
         if (audioRef.current && audioSource) {
             audioRef.current.src = audioSource;
             audioRef.current.volume = defaultVolume;

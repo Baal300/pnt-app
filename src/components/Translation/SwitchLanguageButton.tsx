@@ -2,14 +2,17 @@ import { useTranslation } from "../../hooks/useTranslation";
 import SwapIcon from "../../assets/swap_icon.svg?react";
 
 export const SwitchLanguageButton = () => {
-    const { fromLanguage, toLanguage, setFromLanguage, setToLanguage } =
-        useTranslation();
+    const {
+        sourceLanguage,
+        targetLanguage,
+        setSourceLanguage,
+        setTargetLanguage,
+    } = useTranslation();
 
     const handleLanguageSwitch = () => {
-        const oldFromLanguage = fromLanguage;
-        setFromLanguage(toLanguage);
-        setToLanguage(oldFromLanguage);
-        console.log(`${fromLanguage} ${toLanguage}`);
+        const previousSourceLanguage = sourceLanguage;
+        setSourceLanguage(targetLanguage);
+        setTargetLanguage(previousSourceLanguage);
     };
 
     return (

@@ -8,25 +8,29 @@ type LanguageSelectorProps = {
 export const LanguageSelector = ({
     isLanguageTranslatedFrom,
 }: LanguageSelectorProps) => {
-    const { fromLanguage, toLanguage, setFromLanguage, setToLanguage } =
-        useTranslation();
+    const {
+        sourceLanguage,
+        targetLanguage,
+        setSourceLanguage,
+        setTargetLanguage,
+    } = useTranslation();
 
     const selectedLanguage = isLanguageTranslatedFrom
-        ? fromLanguage
-        : toLanguage;
+        ? sourceLanguage
+        : targetLanguage;
 
     const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
         if (isLanguageTranslatedFrom) {
-            setFromLanguage(e.target.value);
-            if (e.target.value === toLanguage) {
+            setSourceLanguage(e.target.value);
+            if (e.target.value === targetLanguage) {
                 // Swap languages if they are the same
-                setToLanguage(fromLanguage);
+                setTargetLanguage(sourceLanguage);
             }
         } else {
-            setToLanguage(e.target.value);
-            if (e.target.value === fromLanguage) {
+            setTargetLanguage(e.target.value);
+            if (e.target.value === sourceLanguage) {
                 // Swap languages if they are the same
-                setFromLanguage(toLanguage);
+                setSourceLanguage(targetLanguage);
             }
         }
     };
@@ -37,8 +41,11 @@ export const LanguageSelector = ({
             value={selectedLanguage}
             onChange={handleLanguageChange}
         >
-            <option value="de">{"German"}</option>
             <option value="en">{"English"}</option>
+            <option value="fr">{"French"}</option>
+            <option value="de">{"German"}</option>
+            <option value="ja-hrkt">{"Japanese"}</option>
+            <option value="ja-roma">{"Japanese (Romaji)"}</option>
         </select>
     );
 };

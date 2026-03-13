@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
 export type TranslationContextType = {
-    fromLanguage: string;
-    toLanguage: string;
-    setFromLanguage: (lang: string) => void;
-    setToLanguage: (lang: string) => void;
+    sourceLanguage: string;
+    targetLanguage: string;
+    setSourceLanguage: (lang: string) => void;
+    setTargetLanguage: (lang: string) => void;
 };
 
 export const TranslationContext = createContext<

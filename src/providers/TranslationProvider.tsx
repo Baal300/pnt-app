@@ -6,16 +6,16 @@ type TranslationProviderProps = {
 };
 
 export const TranslationProvider = ({ children }: TranslationProviderProps) => {
-    const [fromLanguage, setFromLanguage] = useState("en");
-    const [toLanguage, setToLanguage] = useState("de");
+    const [sourceLanguage, setSourceLanguage] = useState("en");
+    const [targetLanguage, setTargetLanguage] = useState("de");
 
     return (
         <TranslationContext.Provider
             value={{
-                fromLanguage,
-                toLanguage,
-                setFromLanguage,
-                setToLanguage,
+                sourceLanguage: sourceLanguage,
+                targetLanguage: targetLanguage,
+                setSourceLanguage: setSourceLanguage,
+                setTargetLanguage: setTargetLanguage,
             }}
         >
             {children}

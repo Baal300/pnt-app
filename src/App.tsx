@@ -8,8 +8,8 @@ import {
     fetchCrySound,
     fetchPokemonByRegion,
     translatePokemonName,
-} from "./utils/api";
-import { API_URL, REGIONS } from "./constants/constants";
+} from "./components/api/api";
+import { API_HOST, REGIONS } from "./constants/constants";
 import { Header } from "./components/Header";
 import { useTranslation } from "./hooks/useTranslation";
 import { MusicPlayer } from "./components/Music/MusicPlayer";
@@ -23,7 +23,7 @@ const clearRegionCache = () => {
 };
 
 function App() {
-    const { toLanguage } = useTranslation();
+    const { sourceLanguage, targetLanguage } = useTranslation();
     const [input, setInput] = useState("");
     const [result, setResult] = useState<PokemonDataResponse | null>();
     const [crySoundObjectURL, setSoundObjectURL] = useState<string>("");
@@ -78,8 +78,9 @@ function App() {
             try {
                 const result = await translatePokemonName(
                     name,
-                    toLanguage,
-                    API_URL,
+                    sourceLanguage,
+                    targetLanguage,
+                    API_HOST,
                 );
                 setResult(result);
                 setIsLoadingTranslation(false);
@@ -87,7 +88,7 @@ function App() {
                 if (result) {
                     const crySound = await fetchCrySound(
                         result.number,
-                        API_URL,
+                        API_HOST,
                     );
                     setSoundObjectURL(crySound);
                 }

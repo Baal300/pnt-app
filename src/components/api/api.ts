@@ -2,7 +2,7 @@ import type {
     PokemonDataResponse,
     SpeciesNames,
     PokeAPIResult,
-} from "../types/types";
+} from "../../types/types";
 
 export const fetchPokemonNames = async (): Promise<string[]> => {
     try {
@@ -87,12 +87,13 @@ const createAudioObjectURL = async (response: Response) => {
 
 export const translatePokemonName = async (
     name: string,
-    lang: string,
-    apiUrl: string,
+    sourceLanguage: string,
+    targetLanguage: string,
+    apiHost: string,
 ): Promise<PokemonDataResponse | null> => {
     try {
         const res = await fetch(
-            `${apiUrl}/api/translations/${name}?lang=${lang}`,
+            `${apiHost}/api/translations/${name}?sourceLanguage=${sourceLanguage}&targetLanguage=${targetLanguage}`,
         );
         if (!res.ok) {
             throw new Error(
