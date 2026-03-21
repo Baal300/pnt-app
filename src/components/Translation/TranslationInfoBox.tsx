@@ -5,7 +5,7 @@ import type { PokemonDataResponse } from "../../types/types";
 import { NameSearchBar } from "./NameSearchBar";
 import VolumeIcon from "../../assets/volume_up_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
 import MutedIcon from "../../assets/no_sound_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg?react";
-import { PokemonInfoModal } from "../UI/PokemonInfoModal";
+import { PokemonInfoModal } from "../Details/PokemonInfoModal";
 import { LanguageSelectionContainer } from "./LanguageSelectionContainer";
 
 type TranslationInfoBoxProps = {
@@ -65,6 +65,8 @@ export const TranslationInfoBox = ({
         if (pokemonData) {
             setModalIsOpen(true);
         }
+
+        // Fetch data
     };
 
     const handleCloseModal = () => {
@@ -154,6 +156,7 @@ export const TranslationInfoBox = ({
             <PokemonInfoModal
                 isOpen={modalIsOpen}
                 onRequestClose={handleCloseModal}
+                pokemonId={pokemonData?.number}
             />
         </>
     );

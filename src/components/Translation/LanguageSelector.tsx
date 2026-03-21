@@ -37,7 +37,7 @@ export const LanguageSelector = ({
 
     return (
         <select
-            className="select select-lg max-w-32 min-w-28 rounded-xl dark:border-gray-300 dark:bg-gray-700 dark:text-white"
+            className="select select-lg max-w-32 min-w-28 rounded-xl text-sm dark:border-gray-300 dark:bg-gray-700 dark:text-white"
             value={selectedLanguage}
             onChange={handleLanguageChange}
         >
@@ -45,7 +45,7 @@ export const LanguageSelector = ({
             <option value="fr">{"French"}</option>
             <option value="de">{"German"}</option>
             <option value="ja-hrkt">{"Japanese"}</option>
-            <option value="ja-roma">{"Japanese (Romaji)"}</option>
+            <option value="ja-roma">{"JP (Romaji)"}</option>
         </select>
     );
 };

@@ -2,6 +2,8 @@ import type {
     PokemonDataResponse,
     SpeciesNames,
     PokeAPIResult,
+    PokeAPIPokemon,
+    PokemonCardData,
 } from "../../types/types";
 
 export const fetchPokemonNames = async (): Promise<string[]> => {
@@ -19,7 +21,10 @@ export const fetchPokemonNames = async (): Promise<string[]> => {
     }
 };
 
-export const fetchPokemonByRegion = async (start: number, end: number) => {
+export const fetchPokemonByRegion = async (
+    start: number,
+    end: number,
+): Promise<PokeAPIResult[]> => {
     try {
         const res = await fetch(
             `https://pokeapi.co/api/v2/pokemon?limit=${end - start + 1}&offset=${start - 1}`,
@@ -39,7 +44,9 @@ export const fetchPokemonByRegion = async (start: number, end: number) => {
     }
 };
 
-export const fetchPokemonDetails = async (pokeUrl: string) => {
+export const fetchPokemonDetails = async (
+    pokeUrl: string,
+): Promise<PokeAPIPokemon | null> => {
     try {
         const res = await fetch(pokeUrl);
         return await res.json();
@@ -79,6 +86,23 @@ export const fetchCrySound = async (pokemonId: number, apiLocation: string) => {
     }
 };
 
+export const fetchPokemonDetailsById = async (
+    id: number,
+): Promise<PokeAPIPokemon | null> => {
+    try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        if (!res.ok) {
+            throw new Error(
+                `Error fetching Pokémon details by ID: ${res.status} ${res.statusText}`,
+            );
+        }
+        return await res.json();
+    } catch (error) {
+        console.error("Error fetching Pokémon details by ID:", error);
+        return null;
+    }
+};
+
 const createAudioObjectURL = async (response: Response) => {
     const blob = await response.blob();
     const audioUrl = URL.createObjectURL(blob);
@@ -110,10 +134,13 @@ export const translatePokemonName = async (
     }
 };
 
-export const extractPokemonInfoData = async (pokemonList: PokeAPIResult[]) => {
+export const extractPokemonInfoData = async (
+    pokemonList: PokeAPIResult[],
+): Promise<PokemonCardData[]> => {
     return Promise.all(
         pokemonList.map(async (poke) => {
             const pokemonData = await fetchPokemonDetails(poke.url);
+            if (!pokemonData) throw new Error("Failed to fetch Pokemon data");
             const speciesData: SpeciesNames = await fetchSpeciesDetails(
                 pokemonData.species.url,
             );
@@ -132,9 +159,9 @@ export const extractPokemonInfoData = async (pokemonList: PokeAPIResult[]) => {
             return {
                 number: pokemonData.id,
                 name: {
-                    english: english?.name,
-                    german: german?.name,
-                    japanese: japanese?.name,
+                    english: english?.name ?? "",
+                    german: german?.name ?? "",
+                    japanese: japanese?.name ?? "",
                 },
                 image: pokemonData.sprites.front_default,
             };

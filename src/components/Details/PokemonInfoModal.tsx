@@ -1,21 +1,36 @@
 import Modal from "react-modal";
 import { DataCard } from "./DataCard";
+import type { PokeAPIPokemon } from "../../types/types";
+import { useEffect, useState } from "react";
+import { fetchPokemonDetailsById } from "../api/api";
 
-type PokemonInfoModal = {
+type PokemonInfoModalProps = {
     isOpen: boolean;
     onRequestClose: () => void;
+    pokemonId: number | undefined;
 };
 
 export const PokemonInfoModal = ({
     isOpen,
     onRequestClose,
-}: PokemonInfoModal) => {
+    pokemonId,
+}: PokemonInfoModalProps) => {
+    const [data, setData] = useState<PokeAPIPokemon | null>(null);
+
+    useEffect(() => {
+        const fetchData = async (pokemonId: number) => {
+            const data = await fetchPokemonDetailsById(pokemonId);
+            setData(data);
+        };
+        if (pokemonId) {
+            fetchData(pokemonId);
+        }
+    }, [pokemonId]);
     return (
         <Modal
             isOpen={isOpen}
             className="fixed top-20 right-10 bottom-20 left-10 m-auto max-w-4xl"
             contentLabel="Pokémon details"
-            // overlayClassName="fixed z-1 bg-transparent top-0 right-0 bottom-0 left-0"
             onRequestClose={onRequestClose}
             shouldCloseOnOverlayClick={true}
             style={{
@@ -28,9 +43,10 @@ export const PokemonInfoModal = ({
                 <button className="btn" onClick={onRequestClose}>
                     CLOSE
                 </button>
-                <DataCard title={"Pokédex number"} />
-                <DataCard title={"Names"} />
-                <DataCard title={"Types"} />
+                {/* IMAGE HERE */}
+                <DataCard title={"Pokédex number"} data={data} />
+                <DataCard title={"Names"} data={data} />
+                <DataCard title={"Types"} data={data} />
             </div>
         </Modal>
     );

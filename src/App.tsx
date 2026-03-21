@@ -49,16 +49,19 @@ function App() {
 
                 const details = await extractPokemonInfoData(pokemonList);
 
-                if (regionCache.size >= MAX_CACHE_SIZE) {
-                    const firstKey = regionCache.keys().next().value;
-                    if (firstKey !== undefined) {
-                        regionCache.delete(firstKey);
+                if (details !== null) {
+                    // Maintain max cache size
+                    if (regionCache.size >= MAX_CACHE_SIZE) {
+                        const firstKey = regionCache.keys().next().value;
+                        if (firstKey !== undefined) {
+                            regionCache.delete(firstKey);
+                        }
                     }
-                }
-                regionCache.set(regionIndex, details);
+                    regionCache.set(regionIndex, details);
 
-                setPokemonList(details);
-                setIsLoadingRegion(false);
+                    setPokemonList(details);
+                    setIsLoadingRegion(false);
+                }
             } catch (error) {
                 console.error("Error fetching Pokémon by region: ", error);
                 setPokemonList([]);
