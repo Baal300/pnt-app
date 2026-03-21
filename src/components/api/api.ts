@@ -150,7 +150,7 @@ export const extractPokemonInfoData = async (
                 (n) => n.language.name === "en",
             );
             const japanese = speciesData.names.find(
-                (n) => n.language.name === "roomaji",
+                (n) => n.language.name === "ja-roma",
             );
             const german = speciesData.names.find(
                 (n) => n.language.name === "de",

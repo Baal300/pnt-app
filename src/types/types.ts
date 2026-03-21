@@ -26,7 +26,7 @@ export type Region = {
     end: number;
 };
 
-export type PokemonInfoData = {
+export type PokemonCardData = {
     number: number;
     name: PokemonName;
     image: string;
@@ -70,15 +70,5 @@ export type PokeAPIPokemon = {
 export type APIResponseError = {
     number: number;
     translated: string;
-    image: string;
-};
-
-export type PokemonCardData = {
-    number: number;
-    name: {
-        english: string;
-        german: string;
-        japanese: string;
-    };
     image: string;
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TranslationInfoBox } from "./components/Translation/TranslationInfoBox";
 import { PokemonGallery } from "./components/Gallery/PokemonGallery";
 import { RegionSelector } from "./components/Gallery/RegionSelector";
-import type { PokemonDataResponse, PokemonInfoData } from "./types/types";
+import type { PokemonDataResponse, PokemonCardData } from "./types/types";
 import {
     extractPokemonInfoData,
     fetchCrySound,
@@ -17,7 +17,7 @@ import { ScrollToTopButton } from "./components/UI/ScrollToTopButton";
 
 // Simple in-memory cache for regional Pokémon lists
 const MAX_CACHE_SIZE = 10;
-const regionCache = new Map<number, PokemonInfoData[]>();
+const regionCache = new Map<number, PokemonCardData[]>();
 const clearRegionCache = () => {
     regionCache.clear();
 };
@@ -27,7 +27,7 @@ function App() {
     const [input, setInput] = useState("");
     const [result, setResult] = useState<PokemonDataResponse | null>();
     const [crySoundObjectURL, setSoundObjectURL] = useState<string>("");
-    const [pokemonList, setPokemonList] = useState<PokemonInfoData[]>([]);
+    const [pokemonList, setPokemonList] = useState<PokemonCardData[]>([]);
     const [regionIndex, setRegionIndex] = useState<number>(0);
     const [isLoadingTranslation, setIsLoadingTranslation] = useState(false);
     const [isLoadingRegion, setIsLoadingRegion] = useState(false);

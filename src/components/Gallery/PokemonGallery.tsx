@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import type { PokemonInfoData } from "../../types/types";
+import type { PokemonCardData } from "../../types/types";
 
 import { PokemonCard } from "./PokemonCard";
 import { PokemonGallerySkeleton } from "./PokemonGallerySkeleton";
 
 type PokemonGalleryProps = {
-    pokemonList: PokemonInfoData[];
+    pokemonList: PokemonCardData[];
     isLoading?: boolean;
     regionName: string;
 };
