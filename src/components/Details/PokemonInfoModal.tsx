@@ -59,7 +59,7 @@ export const PokemonInfoModal = ({
                 },
             }}
         >
-            <div className="grid h-full w-full grid-cols-2 grid-rows-2 justify-items-center gap-4 bg-teal-700 p-3 outline-6 outline-green-300">
+            <div className="grid h-full w-full grid-cols-1 justify-items-center gap-4 bg-teal-700 p-3 outline-6 outline-green-300 sm:grid-cols-2 sm:grid-rows-2">
                 <button className="btn" onClick={onRequestClose}>
                     CLOSE
                 </button>
@@ -67,7 +67,7 @@ export const PokemonInfoModal = ({
                     <img
                         src={pokemonData?.sprites.front_default}
                         alt={pokemonData?.species.name}
-                        className="h-64 w-64 border-2 border-green-400 bg-amber-100 outline-1"
+                        className="xs:h-64 xs:w-64 h-48 w-48 border-2 border-green-400 bg-amber-100 outline-1"
                     />
                 </div>
                 <DataCard title={"Pokédex Data"}>
