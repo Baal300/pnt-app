@@ -43,7 +43,7 @@ export type PokeAPIPokemon = {
     abilities: { ability: { name: string; url: string } }[];
     cries: { latest: string; previous: string };
     forms: { name: string; url: string }[];
-    types: { name: string; url: string }[];
+    types: { type: { name: string; url: string } }[];
     image: string;
     species: {
         name: string;
@@ -65,6 +65,22 @@ export type PokeAPIPokemon = {
         front_shiny: string;
         back_shiny: string;
     };
+};
+
+export type PokeApiPokemonSpecies = {
+    id: string;
+    name: string;
+    flavor_text_entries: {
+        flavor_text: string;
+        language: {
+            name: string;
+            url: string;
+        };
+        version: {
+            name: string;
+            url: string;
+        };
+    }[];
 };
 
 export type APIResponseError = {
