@@ -61,7 +61,7 @@ export const PokemonInfoModal = ({
                 },
             }}
         >
-            <div className="grid h-full w-full grid-cols-1 justify-items-center gap-4 bg-teal-700 p-3 outline-6 outline-green-300 sm:grid-cols-2 sm:grid-rows-2">
+            <div className="grid h-full w-full grid-cols-1 justify-items-center gap-4 overflow-auto bg-teal-700 p-3 outline-6 outline-green-300 sm:grid-cols-2 sm:grid-rows-2">
                 <button className="btn" onClick={onRequestClose}>
                     CLOSE
                 </button>
