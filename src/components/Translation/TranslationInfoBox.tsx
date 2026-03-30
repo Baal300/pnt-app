@@ -88,6 +88,8 @@ export const TranslationInfoBox = ({
                 <button
                     className="absolute top-[100px] left-[30px] cursor-pointer"
                     onClick={handleMute}
+                    aria-label="mute/unmute"
+                    aria-pressed={muted}
                 >
                     {muted ? (
                         <MutedIcon height={"32px"} width={"32px"} />
@@ -105,6 +107,7 @@ export const TranslationInfoBox = ({
                             ? `absolute inset-0 top-[150px] mx-auto flex h-[256px] w-[256px] cursor-pointer justify-center`
                             : `absolute inset-0 top-[150px] mx-auto flex h-[256px] w-[256px] justify-center`
                     }
+                    aria-label="Open details modal"
                 >
                     {pokemonData?.image && !isLoading && (
                         <div className="hover-3d">
