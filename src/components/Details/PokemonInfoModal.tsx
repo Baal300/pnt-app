@@ -19,7 +19,6 @@ export const PokemonInfoModal = ({
     const [pokemonData, setPokemonData] = useState<PokeAPIPokemon | null>(null);
     const [pokemonSpeciesData, setPokemonSpeciesData] =
         useState<PokeApiPokemonSpecies | null>(null);
-    const [typeIcons, setTypeIcons] = useState<string[]>([]);
 
     useEffect(() => {
         const fetchData = async (pokemonId: number) => {
@@ -34,38 +33,11 @@ export const PokemonInfoModal = ({
                         pokemonData.species.url,
                     );
                     setPokemonSpeciesData(speciesData);
-                    loadTypeIcons(pokemonData);
                 }
             } catch (error) {
                 console.error("Error fetching Pokémon data:", error);
             }
         };
-
-        const loadTypeIcons = async (pokemonData: PokeAPIPokemon) => {
-            const loadTypeIcon = async (typeName: string): Promise<string> => {
-                try {
-                    const module = await import(
-                        `../../assets/types/${typeName}.png`
-                    );
-                    return module.default;
-                } catch (error) {
-                    console.error(
-                        `Failed to load icon for type: ${typeName}`,
-                        error,
-                    );
-                    return "";
-                }
-            };
-
-            const typeIcons = pokemonData.types.map((slot) =>
-                loadTypeIcon(slot.type.name),
-            );
-
-            const typePromises = await Promise.all(typeIcons);
-            setTypeIcons(typePromises);
-        };
-
-        setTypeIcons([]); // Clear previous icons when pokemonId changes
 
         if (pokemonId) {
             fetchData(pokemonId);
@@ -112,13 +84,10 @@ export const PokemonInfoModal = ({
                         </h3>
                         <div className="m-2">
                             {pokemonData
-                                ? typeIcons.map((typeIcon, index) => (
+                                ? pokemonData.types.map((slot) => (
                                       <TypeBadge
-                                          key={typeIcon}
-                                          src={typeIcon}
-                                          alt={
-                                              pokemonData.types[index].type.name
-                                          }
+                                          key={slot.type.name}
+                                          typeName={slot.type.name}
                                       />
                                   ))
                                 : null}
