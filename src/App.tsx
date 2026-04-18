@@ -121,17 +121,28 @@ function App() {
                 />
 
                 <div className="divider dark:divider-info"></div>
-
-                <RegionSelector
-                    regions={REGIONS}
-                    setRegionIndex={setRegionIndex}
-                    regionIndex={regionIndex}
-                />
-                <PokemonGallery
-                    pokemonList={pokemonList}
-                    isLoading={isLoadingRegion}
-                    regionName={REGIONS[regionIndex].name}
-                />
+                <div className="w-full xl:flex xl:flex-row">
+                    <div className="flex w-full justify-center xl:mt-18 xl:w-48 xl:flex-shrink-0">
+                        <RegionSelector
+                            regions={REGIONS}
+                            setRegionIndex={setRegionIndex}
+                            regionIndex={regionIndex}
+                        />
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <h2 className="mt-4 mb-4 text-2xl font-bold xl:mt-0">
+                            Pokémon Gallery
+                        </h2>
+                        <h3 className="mb-2 text-lg font-semibold">
+                            {REGIONS[regionIndex].name}
+                        </h3>
+                        <PokemonGallery
+                            pokemonList={pokemonList}
+                            isLoading={isLoadingRegion}
+                            regionName={REGIONS[regionIndex].name}
+                        />
+                    </div>
+                </div>
             </main>
             <ScrollToTopButton className="fixed right-5 bottom-5 z-10" />
         </div>
