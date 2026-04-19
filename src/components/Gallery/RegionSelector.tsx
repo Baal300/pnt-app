@@ -21,7 +21,7 @@ export const RegionSelector = ({
             {regions.map((region, index) => (
                 <li key={region.name}>
                     <button
-                        className={`w-full justify-center rounded-none border p-1.5 font-bold hover:cursor-pointer ${
+                        className={`w-full justify-center rounded-none border p-1.5 text-lg font-bold hover:cursor-pointer ${
                             index === regionIndex
                                 ? "bg-green-800 text-white dark:bg-green-500" // Selected state
                                 : "from-start-gradient dark:from-start-gradient to-end-gradient bg-linear-to-br hover:bg-green-400 active:bg-green-300 dark:to-green-800 dark:hover:bg-green-800 dark:active:bg-green-700" // Normal state

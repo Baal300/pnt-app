@@ -3,10 +3,10 @@
 @plugin "daisyui";
 
 @plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  --color-primary: green;
-  --color-secondary: red;
+    name: "light";
+    default: true;
+    --color-primary: green;
+    --color-secondary: red;
 }
 
 @theme {
@@ -14,6 +14,10 @@
     --color-mint-500: oklch(0.72 0.11 178);
     --color-app-background: rgb(221, 224, 242);
     --color-app-background-dark: rgb(44, 32, 65);
+    --breakpoint-region-select-lg: 72rem;
+    --breakpoint-gallery-6-cols: 83rem;
+    --breakpoint-gallery-7-cols: 93rem;
+    --breakpoint-gallery-8-cols: 103rem;
     --breakpoint-xs: 23rem;
     --text-tiny: 0.625rem;
     --color-start-gradient: var(--color-green-600);
@@ -21,6 +25,12 @@
     --color-start-gradient-dark: var(--color-green-900);
     --color-end-gradient-dark: var(--color-green-600);
     --color-info-box-background: #f7faff;
+}
+
+@layer components {
+    .gallery {
+        @apply gallery-8-cols:grid-cols-[repeat(8,_10.5rem)] gallery-7-cols:grid-cols-[repeat(7,_10.5rem)] gallery-6-cols:grid-cols-[repeat(6,_10.5rem)] mx-1 grid w-full grid-cols-[repeat(auto-fill,_minmax(10.5rem,_1fr))] justify-center justify-items-center gap-x-3 gap-y-1 md:grid-cols-[repeat(4,_10.5rem)] lg:grid-cols-[repeat(5,_10.5rem)];
+    }
 }
 
 /* Enable manually applying custom dark theme */

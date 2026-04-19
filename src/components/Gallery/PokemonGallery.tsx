@@ -21,14 +21,12 @@ export const PokemonGallery = ({
     }, [pokemonList]);
 
     return (
-        <div>
+        <>
             {isLoading ? (
                 <PokemonGallerySkeleton />
             ) : (
-                <div className="mx-1 grid w-full grid-cols-[repeat(auto-fill,_minmax(10.5rem,_1fr))] justify-center justify-items-center gap-x-3 gap-y-1 md:grid-cols-[repeat(4,_10.5rem)] lg:grid-cols-[repeat(5,_10.5rem)] xl:grid-cols-[repeat(6,_10.5rem)]">
-                    {pokemonCards}
-                </div>
+                <div className="gallery">{pokemonCards}</div>
             )}
-        </div>
+        </>
     );
 };

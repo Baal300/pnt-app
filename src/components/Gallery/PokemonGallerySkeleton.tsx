@@ -6,6 +6,13 @@ type PokemonGallerySkeletonProps = {
     rows?: number;
 };
 
+const BREAKPOINT_GALLERY_3_COLS = 576;
+const BREAKPOINT_GALLERY_4_COLS = 640;
+const BREAKPOINT_GALLERY_5_COLS = 1024;
+const BREAKPOINT_GALLERY_6_COLS = 1280;
+const BREAKPOINT_GALLERY_7_COLS = 1488;
+const BREAKPOINT_GALLERY_8_COLS = 1648;
+
 const getResponsiveCardCount = (rows: number) => {
     if (typeof window === "undefined") {
         // SSR fallback
@@ -16,16 +23,20 @@ const getResponsiveCardCount = (rows: number) => {
     let columns;
 
     // Change column numbers based on breakpoints
-    if (width < 576) {
+    if (width < BREAKPOINT_GALLERY_3_COLS) {
         columns = 2;
-    } else if (width < 640) {
+    } else if (width < BREAKPOINT_GALLERY_4_COLS) {
         columns = 3;
-    } else if (width < 1024) {
+    } else if (width < BREAKPOINT_GALLERY_5_COLS) {
         columns = 4;
-    } else if (width < 1280) {
+    } else if (width < BREAKPOINT_GALLERY_6_COLS) {
         columns = 5;
-    } else {
+    } else if (width < BREAKPOINT_GALLERY_7_COLS) {
         columns = 6;
+    } else if (width < BREAKPOINT_GALLERY_8_COLS) {
+        columns = 7;
+    } else {
+        columns = 8;
     }
 
     // Card count is columns * rows
@@ -56,11 +67,7 @@ export const PokemonGallerySkeleton = ({
     const finalCardCount = cardCount ?? responsiveCardCount;
 
     return (
-        <div
-            aria-busy="true"
-            aria-live="polite"
-            className="mx-1 grid w-full grid-cols-[repeat(auto-fill,_minmax(10.5rem,_1fr))] justify-center justify-items-center gap-x-3 gap-y-1 md:grid-cols-[repeat(4,_10.5rem)] lg:grid-cols-[repeat(5,_10.5rem)] xl:grid-cols-[repeat(6,_10.5rem)]"
-        >
+        <div aria-busy="true" aria-live="polite" className="gallery">
             {Array.from({ length: finalCardCount }).map((_, i) => (
                 <PokemonCardSkeleton key={i} />
             ))}

@@ -121,8 +121,8 @@ function App() {
                 />
 
                 <div className="divider dark:divider-info"></div>
-                <div className="w-full xl:flex xl:flex-row">
-                    <div className="flex w-full justify-center xl:mt-18 xl:w-48 xl:flex-shrink-0">
+                <div className="region-select-lg:flex region-select-lg:flex-row w-full">
+                    <div className="region-select-lg:mt-18 region-select-lg:flex-shrink-0 region-select-lg:w-48 flex w-full justify-center">
                         <RegionSelector
                             regions={REGIONS}
                             setRegionIndex={setRegionIndex}
@@ -130,7 +130,7 @@ function App() {
                         />
                     </div>
                     <div className="flex flex-col items-center">
-                        <h2 className="mt-4 mb-4 text-2xl font-bold xl:mt-0">
+                        <h2 className="region-select-lg:mt-0 mt-4 mb-4 text-2xl font-bold">
                             Pokémon Gallery
                         </h2>
                         <h3 className="mb-2 text-lg font-semibold">
